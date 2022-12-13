@@ -5,6 +5,7 @@
 #include <time.h>
 
 
+
 void setOriginToCenter(sf::Sprite &object)
 {
     auto rect = object.getGlobalBounds();
