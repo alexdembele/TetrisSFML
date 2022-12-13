@@ -4,6 +4,8 @@ Réutilisation d'ancien code, il se peut qu'il reste des lignes inutiles dans le
 
 TO DO LIST:
 
+-gameover
+
 -créer les classes
 
 -expérimenter multijoueur
