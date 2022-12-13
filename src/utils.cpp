@@ -4,8 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_X 15000
-#define MAX_Y 8000
+
 void setOriginToCenter(sf::Sprite &object)
 {
     auto rect = object.getGlobalBounds();

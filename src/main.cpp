@@ -107,7 +107,7 @@ int main()
          int n=rand()%7;
          for (int i=0;i<4;i++)
            {
-            a[i].x = figures[n][i] % 2 +4; //spawn au centre
+            a[i].x = figures[n][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
             a[i].y = figures[n][i] / 2;
            }
         }
