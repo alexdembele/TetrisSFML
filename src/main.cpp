@@ -37,7 +37,7 @@ int main()
 {
     srand(time(0));     
 
-    RenderWindow window(VideoMode(320, 480), "The Game!");
+    RenderWindow window(VideoMode(920, 41080), "The Game!");
 
     Texture t1,t2,t3;
     if(!t1.loadFromFile("../Projet/images/tiles.png"))
