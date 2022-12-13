@@ -24,6 +24,7 @@ int figures[7][4] =
     2,3,4,5, // O
 };
 
+// regarde qi la pièce peut se déplacer
 bool check()
 {
    for (int i=0;i<4;i++)
@@ -76,7 +77,7 @@ int main()
     if (Keyboard::isKeyPressed(Keyboard::Down)) delay=0.05;
 
     //// <- Move -> ///
-    for (int i=0;i<4;i++)  { b[i]=a[i]; a[i].x+=dx; }
+    for (int i=0;i<4;i++)  { b[i]=a[i]; a[i].x+=dx; } //b est un tampon pour voir si le mouvement de a est valide
     if (!check()) for (int i=0;i<4;i++) a[i]=b[i];
 
     //////Rotate//////
@@ -90,7 +91,7 @@ int main()
             a[i].x = p.x - x;
             a[i].y = p.y + y;
            }
-           if (!check()) for (int i=0;i<4;i++) a[i]=b[i];
+           if (!check()) for (int i=0;i<4;i++) a[i]=b[i];// b est un tampon pour voir la rotation est valide
       }
 
     ///////Tick//////
@@ -98,7 +99,7 @@ int main()
       {
         for (int i=0;i<4;i++) { b[i]=a[i]; a[i].y+=1; }
 
-        if (!check())
+        if (!check()) // si on ne peut plus bouger, on actualise le terrain et on créé une nouvelle pièce
         {
          for (int i=0;i<4;i++) field[b[i].y][b[i].x]=colorNum;
 
@@ -106,7 +107,7 @@ int main()
          int n=rand()%7;
          for (int i=0;i<4;i++)
            {
-            a[i].x = figures[n][i] % 2;
+            a[i].x = figures[n][i] % 2 +4; //spawn au centre
             a[i].y = figures[n][i] / 2;
            }
         }
@@ -130,9 +131,10 @@ int main()
     dx=0; rotate=0; delay=0.3;
 
     /////////draw//////////
-    window.clear(Color::Yellow);    
+    window.clear(Color::Black);    
     window.draw(background);
           
+    // affichage grille
     for (int i=0;i<M;i++)
      for (int j=0;j<N;j++)
        {
@@ -142,7 +144,7 @@ int main()
          s.move(28,31); //offset
          window.draw(s);
        }
-
+    //affichage pièce en déplacement
     for (int i=0;i<4;i++)
       {
         s.setTextureRect(IntRect(colorNum*18,0,18,18));
