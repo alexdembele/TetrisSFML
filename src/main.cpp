@@ -2,6 +2,7 @@
 #include <time.h>
 #include<sstream>
 #include<iostream>
+#include"utils.hpp"
 using namespace sf;
 
 const int M = 20;
@@ -37,7 +38,7 @@ int main()
 {
     srand(time(0));     
 
-    RenderWindow window(VideoMode(920, 41080), "The Game!");
+    RenderWindow window(VideoMode(1800, 1000), "The Game!");
 
     Texture t1,t2,t3;
     if(!t1.loadFromFile("../Projet/images/tiles.png"))
@@ -46,9 +47,9 @@ int main()
       printf("Erreur chargement\n");
     if(!t3.loadFromFile("../Projet/images/frame.png"))
       printf("Erreur chargement\n");
-
+    
     Sprite s(t1), background(t2), frame(t3);
-
+    scaleToMinSize(background,1900,1100);
     int dx=0; bool rotate=0; int colorNum=1;
     float timer=0,delay=0.3; 
 
@@ -129,7 +130,7 @@ int main()
     dx=0; rotate=0; delay=0.3;
 
     /////////draw//////////
-    window.clear(Color::White);    
+    window.clear(Color::Yellow);    
     window.draw(background);
           
     for (int i=0;i<M;i++)
