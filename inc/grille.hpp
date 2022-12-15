@@ -13,7 +13,8 @@ class Grille
     private:
         int grille[hauteur][largeur] ;
     public:
-
+        void clearLine();
+        void affichage();
         
 };
 

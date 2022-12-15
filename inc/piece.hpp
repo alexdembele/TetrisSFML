@@ -32,6 +32,7 @@ class Piece
         explicit Piece(int grille);//construit une pièce aléatoirement dans la grille spécifié
         void rotate();
         void move();
+        void affichage();
 }
 ;
 #endif
