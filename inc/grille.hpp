@@ -8,10 +8,10 @@ const int hauteur=20;
 const int largeur=10;
 
 
-class grille
+class Grille
 {
     private:
-        int field[hauteur][largeur] ;
+        int grille[hauteur][largeur] ;
     public:
 
         
