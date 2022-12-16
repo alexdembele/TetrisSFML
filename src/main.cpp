@@ -3,6 +3,11 @@
 #include<sstream>
 #include<iostream>
 #include"utils.hpp"
+#include"piece.hpp"
+#include"grille.hpp"
+
+
+//TRICKY TOWER
 using namespace sf;
 
 const int M = 20;

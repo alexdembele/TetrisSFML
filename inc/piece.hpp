@@ -25,13 +25,14 @@ struct point
 class Piece
 { 
     private:
-        point carres[4];
+        point courant[4];
+        point tampon[4];
 
 
     public:
         explicit Piece(int grille);//construit une pièce aléatoirement dans la grille spécifié
-        void rotate();
-        void move();
+        void rotate(int sens);
+        void move(int direcion);
         void affichage();
 }
 ;
