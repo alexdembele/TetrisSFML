@@ -20,7 +20,7 @@ struct Point
 
 
 
-// regarde qi la pièce peut se déplacer
+// regarde si la pièce peut se déplacer
 bool check()
 {
    for (int i=0;i<4;i++)
