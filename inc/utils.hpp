@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 #include <time.h>
+#include "piece.hpp"
+#include "grille.hpp"
 
 void setOriginToCenter(sf::Sprite &object);
 void setOriginToCenter(sf::Shape &object);
@@ -15,5 +17,7 @@ void scaleToMaxSize(sf::Sprite &sp, double size_x, double size_y);
 void scaleByRadius(sf::Sprite &sp, int radius);
 
 void setTextCenterPosition(sf::Text &txt, sf::Vector2f center);
+bool check(Piece courant,Grille terrain);
+
 
 #endif

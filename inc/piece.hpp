@@ -4,7 +4,7 @@
 #include "SFML/System/Vector2.hpp"
 #include <SFML/Graphics.hpp>
 
-int figures[7][4] =
+/*int figures[7][4] =
 {
     1,3,5,7, // I
     2,4,5,7, // Z
@@ -13,7 +13,7 @@ int figures[7][4] =
     2,3,5,7, // L
     3,5,7,6, // J
     2,3,4,5, // O
-};
+};*/
 
 struct point
 {
@@ -24,14 +24,14 @@ struct point
 
 class Piece
 { 
-    private:
+    public:
         point courant[4];
         point tampon[4];
 
 
     public:
-        explicit Piece(int grille);//construit une pièce aléatoirement dans la grille spécifié
-        void rotate(int sens);
+        Piece(int grille, int** figures);//construit une pièce aléatoirement dans la grille spécifié
+        void rotate();
         void move(int direcion);
         void affichage();
 }

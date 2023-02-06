@@ -3,6 +3,8 @@
 #include <cmath>
 #include <stdlib.h>
 #include <time.h>
+#include "piece.hpp"
+#include "grille.hpp"
 
 
 
@@ -51,6 +53,15 @@ void setTextCenterPosition(sf::Text &txt, sf::Vector2f center)
     offset.y = txt.getPosition().y - txt.getGlobalBounds().top - txt.getGlobalBounds().height/2.;
 
     txt.setPosition(center + offset);
+}
+
+bool check(Piece piece,Grille terrain)
+{
+   for (int i=0;i<4;i++)
+      if (piece.courant[i].x<0 || piece.courant[i].x>=largeur|| piece.courant[i].y>=hauteur) return 0;
+      else if (terrain.grille[piece.courant[i].y][piece.courant[i].x]) return 0;
+
+   return 1;
 }
 
 

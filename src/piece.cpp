@@ -1,7 +1,7 @@
 #include "piece.hpp"
 #include <SFML/System.hpp>
 
-explicit Piece::Piece(int grille)
+Piece::Piece(int grille, int** figures)
 {
     int typePiece = rand()%7;
          for (int i=0;i<4;i++)
@@ -14,9 +14,20 @@ explicit Piece::Piece(int grille)
 }
 
 
-void Piece::rotate(int sens)
+void Piece::rotate()
 {
-
+  point p =courant[1]; // centre de rotation
+  for (int j=0;j<4;j++)
+  {
+    int x = courant[j].y-p.y;
+    int y = courant[j].x-p.x;
+    courant[j].x=p.x-x;
+    courant[j].y=p.y+y;
+  }
+  for(int j=0;j<4;j++)
+  {
+    courant[j]=tampon[j];
+  }
 }
 
 void Piece::move(int direction)

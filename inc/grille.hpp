@@ -10,7 +10,7 @@ const int largeur=10;
 
 class Grille
 {
-    private:
+    public:
         int grille[hauteur][largeur] ;
     public:
         void clearLine();
