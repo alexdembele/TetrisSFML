@@ -3,6 +3,8 @@
 
 #include "SFML/System/Vector2.hpp"
 #include <SFML/Graphics.hpp>
+#include "grille.hpp"
+#include "utils.hpp"
 
 /*int figures[7][4] =
 {
@@ -30,9 +32,9 @@ class Piece
 
 
     public:
-        Piece(int grille, int** figures);//construit une pièce aléatoirement dans la grille spécifié
-        void rotate();
-        void move(int direcion);
+        Piece(int** figures);//construit une pièce aléatoirement dans la grille spécifié
+        void rotate(Grille grille);
+        void move(int direcion, Grille grille);
         void affichage();
 }
 ;

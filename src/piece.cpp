@@ -1,7 +1,9 @@
 #include "piece.hpp"
+#include "utils.hpp"
+#include "grille.hpp"
 #include <SFML/System.hpp>
 
-Piece::Piece(int grille, int** figures)
+Piece::Piece(int** figures)
 {
     int typePiece = rand()%7;
          for (int i=0;i<4;i++)
@@ -14,7 +16,7 @@ Piece::Piece(int grille, int** figures)
 }
 
 
-void Piece::rotate()
+void Piece::rotate(Grille grille)
 {
   point p =courant[1]; // centre de rotation
   for (int j=0;j<4;j++)
@@ -24,13 +26,28 @@ void Piece::rotate()
     courant[j].x=p.x-x;
     courant[j].y=p.y+y;
   }
-  for(int j=0;j<4;j++)
+  if (!occupe(courant, grille))
   {
-    courant[j]=tampon[j];
+    for(int j=0;j<4;j++)
+    {
+      courant[j]=tampon[j];
+    }
   }
 }
 
-void Piece::move(int direction)
+void Piece::move(int direction, Grille grille)
 {
+  for (int i=0;i<4;i++) 
+  { 
+    tampon[i]=courant[i]; 
+    courant[i].x+=direction; 
+  }
+  if (!occupe(courant,grille)) 
+  {
+    for (int i=0;i<4;i++) 
+    {
+      courant[i]=tampon[i];
+    }
+  }
 
 }

@@ -8,6 +8,9 @@
 #include "piece.hpp"
 #include "grille.hpp"
 
+
+
+
 void setOriginToCenter(sf::Sprite &object);
 void setOriginToCenter(sf::Shape &object);
 void setOriginToCenter(sf::Text &object);
@@ -17,7 +20,7 @@ void scaleToMaxSize(sf::Sprite &sp, double size_x, double size_y);
 void scaleByRadius(sf::Sprite &sp, int radius);
 
 void setTextCenterPosition(sf::Text &txt, sf::Vector2f center);
-bool check(Piece courant,Grille terrain);
+bool occupe(point *courant,Grille terrain);
 
 
 #endif
