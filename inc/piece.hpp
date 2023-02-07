@@ -16,7 +16,7 @@
     3,5,7,6, // J
     2,3,4,5, // O
 };*/
-
+class Grille;
 struct point
 {
     int x;
