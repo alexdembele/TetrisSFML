@@ -55,14 +55,7 @@ void setTextCenterPosition(sf::Text &txt, sf::Vector2f center)
     txt.setPosition(center + offset);
 }
 
-bool occupe(point *courant,Grille terrain)
-{
-   for (int i=0;i<4;i++)
-      if (courant[i].x<0 || courant[i].x>=largeur|| courant[i].y>=hauteur) return 0;
-      else if (terrain.grille[courant[i].y][courant[i].x]) return 0;
 
-   return 1;
-}
 
 
 

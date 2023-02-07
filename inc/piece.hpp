@@ -36,6 +36,7 @@ class Piece
         void rotate(Grille grille);
         void move(int direcion, Grille grille);
         void affichage();
+        bool occupe( Grille grille);
 }
 ;
 #endif

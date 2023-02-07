@@ -15,6 +15,14 @@ Piece::Piece(int** figures)
            }
 }
 
+bool Piece::occupe(Grille grille)
+{
+  for (int i=0;i<4;i++)
+      if (courant[i].x<0 || courant[i].x>=largeur || courant[i].y>=hauteur) return 0;
+      else if (grille.grille[courant[i].y][courant[i].x]) return 0;
+
+   return 1;
+}
 
 void Piece::rotate(Grille grille)
 {
@@ -26,7 +34,7 @@ void Piece::rotate(Grille grille)
     courant[j].x=p.x-x;
     courant[j].y=p.y+y;
   }
-  if (!occupe(courant, grille))
+  if (!occupe( grille))
   {
     for(int j=0;j<4;j++)
     {
@@ -42,7 +50,7 @@ void Piece::move(int direction, Grille grille)
     tampon[i]=courant[i]; 
     courant[i].x+=direction; 
   }
-  if (!occupe(courant,grille)) 
+  if (!occupe(grille)) 
   {
     for (int i=0;i<4;i++) 
     {

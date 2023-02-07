@@ -20,7 +20,7 @@ void scaleToMaxSize(sf::Sprite &sp, double size_x, double size_y);
 void scaleByRadius(sf::Sprite &sp, int radius);
 
 void setTextCenterPosition(sf::Text &txt, sf::Vector2f center);
-bool occupe(point *courant,Grille terrain);
+
 
 
 #endif
