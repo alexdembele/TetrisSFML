@@ -158,7 +158,7 @@ int main()
     {
       temps=0;
     }
-    printf("%f\n",temps);
+    
     ///////check lines//////////
     /*int k=M-1;
     for (int i=M-1;i>0;i--)

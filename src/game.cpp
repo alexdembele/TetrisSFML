@@ -18,6 +18,7 @@ Game::Game(Grille grille_, Piece piece_)
     direction=0;
     rotate=0;
     delai=0.3;
+    tempsTampon=0;
 }
 
 void Game::commande(Event clavier)
@@ -39,12 +40,17 @@ void Game::commande(Event clavier)
 bool Game::updateGame(float timer)
 {
     bool tick=false;
-    piece.move(direction,grille);
-    if(rotate)
+    printf("%f:%f\n",timer,tempsTampon);
+    if((timer-tempsTampon)>0.07)
     {
-        piece.rotate(grille);
+        
+        piece.move(direction,grille);
+        if(rotate)
+        {
+            piece.rotate(grille);
+        }
+        tempsTampon=timer;
     }
-
     if(timer>delai)
     {
         piece.descend();
@@ -53,6 +59,7 @@ bool Game::updateGame(float timer)
             grille.ajoutePiece(piece);
             piece.reset();
         }
+        tempsTampon=0;
         tick=true;
     }
     grille.clearLine();
