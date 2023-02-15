@@ -3,13 +3,36 @@
 #include "grille.hpp"
 #include <SFML/System.hpp>
 
-Piece::Piece(int** figures)
+int defPiece[7][4] =
+{
+    1,3,5,7, // I
+    2,4,5,7, // Z
+    3,5,4,6, // S
+    3,5,4,7, // T
+    2,3,5,7, // L
+    3,5,7,6, // J
+    2,3,4,5, // O
+};
+
+Piece::Piece()
 {
     int typePiece = rand()%7;
          for (int i=0;i<4;i++)
            {
-            courant[i].x = figures[typePiece][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
-            courant[i].y = figures[typePiece][i] / 2;
+            courant[i].x = defPiece[typePiece][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
+            courant[i].y = defPiece[typePiece][i] / 2;
+            tampon[i].x=0;
+            tampon[i].y=0;
+           }
+}
+
+void Piece::reset()
+{
+  int typePiece = rand()%7;
+         for (int i=0;i<4;i++)
+           {
+            courant[i].x = defPiece[typePiece][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
+            courant[i].y = defPiece[typePiece][i] / 2;
             tampon[i].x=0;
             tampon[i].y=0;
            }

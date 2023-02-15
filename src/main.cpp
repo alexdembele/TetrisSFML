@@ -1,4 +1,8 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <cmath>
+#include <vector>
 #include <time.h>
 #include<sstream>
 #include<iostream>
@@ -43,7 +47,7 @@ bool check()
 int main()
 {
     srand(time(0));     
-
+    //chargement graphisme
     RenderWindow window(VideoMode(1800, 1000), "The Game!");
 
     Texture t1,t2,t3;
@@ -54,13 +58,24 @@ int main()
     if(!t3.loadFromFile("../Projet/images/frame.png"))
       printf("Erreur chargement\n");
     
-    Sprite s(t1), background(t2), frame(t3);
+    Sprite s(t1), background(t2), frame(t3),fram(t3);
+    fram.move(Vector2f(450.f,0));
     scaleToMinSize(background,1900,1100);
+
+    //definition des parametres de jeu
     int dx=0; bool rotate=0; int colorNum=1;
     float timer=0,delay=0.3; 
 
     Clock clock;
 
+    //TEST
+    //definition de la grille
+    Grille Ter;
+    
+    //definition de la piece
+    Piece piec;
+
+    //
     while (window.isOpen())
     {
         float time = clock.getElapsedTime().asSeconds();
@@ -85,6 +100,9 @@ int main()
     for (int i=0;i<4;i++)  { b[i]=a[i]; a[i].x+=dx; } //b est un tampon pour voir si le mouvement de a est valide
     if (!check()) for (int i=0;i<4;i++) a[i]=b[i];
 
+    piec.move(dx,Ter);
+
+
     //////Rotate//////
     if (rotate)
       {
@@ -97,6 +115,7 @@ int main()
             a[i].y = p.y + y;
            }
            if (!check()) for (int i=0;i<4;i++) a[i]=b[i];// b est un tampon pour voir la rotation est valide
+           piec.rotate(Ter);
       }
 
     ///////Tick//////
@@ -115,6 +134,10 @@ int main()
             a[i].x = figures[n][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
             a[i].y = figures[n][i] / 2;
            }
+        }
+        if (!piec.occupe(Ter))
+        {
+          
         }
 
          timer=0;
@@ -159,6 +182,7 @@ int main()
       }
 
     window.draw(frame);
+    window.draw(fram);
     window.display();
     }
 

@@ -2,6 +2,17 @@
 #include "piece.hpp"
 #include <SFML/System.hpp>
 
+
+Grille::Grille()
+{
+    for(int i=0;i<hauteur;i++)
+    {
+      for(int j=0;j<largeur;j++)
+      {
+        grille[i][j]=0;
+      }
+    }
+}
 void Grille::clearLine()
 {
     int k=hauteur-1;
