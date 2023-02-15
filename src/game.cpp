@@ -35,6 +35,22 @@ void Game::commande(Event clavier)
     {
         delai=0.05;
     }
+    //eclair
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) 
+    {
+        
+    }
+
+    //supprime ligne
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) 
+    {
+        
+    }
+    //supprime colonne
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) 
+    {
+        
+    }
 }
 
 bool Game::updateGame(float timer)

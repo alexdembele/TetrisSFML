@@ -20,7 +20,7 @@ using namespace sf;
 
 class Grille;
 class Piece;
-class Game: public sf::Drawable
+class Game
 {
 
     public:

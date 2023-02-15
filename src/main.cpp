@@ -64,19 +64,19 @@ int main()
     scaleToMinSize(background,1900,1100);
 
     //definition des parametres de jeu
-    int dx=0; bool rotate=0; int colorNum=1;
-    float timer=0,delay=0.3; 
+    
+    
 
 
     Clock clock;
 
     //TEST
     //definition de la grille
-    Grille Ter;
+    
     Grille Tertest;
     
     //definition de la piece
-    Piece piec;
+   
     Piece piecTest;
 
     //definition de la partie
@@ -87,7 +87,7 @@ int main()
     {
         float time = clock.getElapsedTime().asSeconds();
         clock.restart();
-        timer+=time;
+        
         temps+=time;
 
         Event e;
@@ -96,84 +96,22 @@ int main()
             if (e.type == Event::Closed)
                 window.close();
 
-            if (e.type == Event::KeyPressed)
-              if (e.key.code==Keyboard::Up) rotate=true;
-              else if (e.key.code==Keyboard::Left) dx=-1;
-              else if (e.key.code==Keyboard::Right) dx=1;
+            
               myGame.commande(e);
         }
 
-    if (Keyboard::isKeyPressed(Keyboard::Down)) delay=0.05;
     
-    //// <- Move -> ///
-    /*for (int i=0;i<4;i++)  { b[i]=a[i]; a[i].x+=dx; } //b est un tampon pour voir si le mouvement de a est valide
-    if (!check()) for (int i=0;i<4;i++) a[i]=b[i];*/
+   
+    
 
-    piec.move(dx,Ter);
-
-
-    //////Rotate//////
-    if (rotate)
-      {
-        /*Point p = a[1]; //center of rotation
-        for (int i=0;i<4;i++)
-          {
-            int x = a[i].y-p.y;
-            int y = a[i].x-p.x;
-            a[i].x = p.x - x;
-            a[i].y = p.y + y;
-           }
-           if (!check()) for (int i=0;i<4;i++) a[i]=b[i];// b est un tampon pour voir la rotation est valide*/
-           piec.rotate(Ter);
-      }
-
-    ///////Tick//////
-    if (timer>delay)
-      {
-        /*for (int i=0;i<4;i++) { b[i]=a[i]; a[i].y+=1; }
         
-
-        if (!check()) // si on ne peut plus bouger, on actualise le terrain et on créé une nouvelle pièce
-        {
-         for (int i=0;i<4;i++) field[b[i].y][b[i].x]=colorNum;
-
-         colorNum=1+rand()%7;
-         int n=rand()%7;
-         for (int i=0;i<4;i++)
-           {
-            a[i].x = figures[n][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
-            a[i].y = figures[n][i] / 2;
-           }
-        }*/
-        piec.descend();
-        if (!piec.occupe(Ter))
-        {
-          Ter.ajoutePiece(piec);
-          piec.reset();
-        }
-
-         timer=0;
-      }
     if (myGame.updateGame(temps))
     {
       temps=0;
     }
     
-    ///////check lines//////////
-    /*int k=M-1;
-    for (int i=M-1;i>0;i--)
-    {
-        int count=0;
-        for (int j=0;j<N;j++)
-        {
-            if (field[i][j]) count++;
-            field[k][j]=field[i][j];
-        }
-        if (count<N) k--;
-    }*/
-    Ter.clearLine();
-
-    dx=0; rotate=0; delay=0.3;
+    
+     
 
     /////////draw//////////
     window.clear(Color::Black);    
@@ -189,15 +127,7 @@ int main()
          s.move(28,31); //offset
          window.draw(s);
        }
-    for (int i=0;i<M;i++)
-     for (int j=0;j<N;j++)
-       {
-         if (Ter.grille[i][j]==0) continue;
-         s.setTextureRect(IntRect(Ter.grille[i][j]*18,0,18,18));
-         s.setPosition(j*18,i*18);
-         s.move(478,31); //offset
-         window.draw(s);
-       }
+   
     //affichage pièce en déplacement
     for (int i=0;i<4;i++)
       {
@@ -207,13 +137,7 @@ int main()
         window.draw(s);
       }
 
-    for (int i=0;i<4;i++)
-      {
-        s.setTextureRect(IntRect(piec.color*18,0,18,18));
-        s.setPosition(piec.courant[i].x*18,piec.courant[i].y*18);
-        s.move(478,31); //offset
-        window.draw(s);
-      }
+    
 
     window.draw(frame);
     window.draw(fram);
