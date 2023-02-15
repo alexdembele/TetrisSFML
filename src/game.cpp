@@ -45,11 +45,16 @@ bool Game::updateGame(float timer)
     {
         
         piece.move(direction,grille);
+        
+        tempsTampon=timer;
+    }
+    if((timer-tempsTmp)>0.1)
+    {
         if(rotate)
         {
             piece.rotate(grille);
         }
-        tempsTampon=timer;
+        tempsTmp=timer;
     }
     if(timer>delai)
     {
@@ -60,6 +65,7 @@ bool Game::updateGame(float timer)
             piece.reset();
         }
         tempsTampon=0;
+        tempsTmp=0;
         tick=true;
     }
     grille.clearLine();

@@ -29,6 +29,7 @@ class Game
         bool rotate;
         float delai;
         float tempsTampon;
+        float tempsTmp;
 
     public:
         Game(Grille grille_, Piece piece_);
