@@ -12,7 +12,10 @@ TO DO LIST:
 
 -implémenter multijoueur
 
-Comment compiler le projet:
+
+
+
+***Comment compiler le projet***:
 
 Installation des modules nécessaires:
 
