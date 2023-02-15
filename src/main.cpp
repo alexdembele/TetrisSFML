@@ -9,6 +9,7 @@
 #include"utils.hpp"
 #include"piece.hpp"
 #include"grille.hpp"
+#include"game.hpp"
 
 
 //TRICKY TOWER
@@ -66,21 +67,28 @@ int main()
     int dx=0; bool rotate=0; int colorNum=1;
     float timer=0,delay=0.3; 
 
+
     Clock clock;
 
     //TEST
     //definition de la grille
     Grille Ter;
+    Grille Tertest;
     
     //definition de la piece
     Piece piec;
+    Piece piecTest;
 
-    //
+    //definition de la partie
+    Game myGame(Tertest,piecTest);
+    //definition temps
+    float temps=0;
     while (window.isOpen())
     {
         float time = clock.getElapsedTime().asSeconds();
         clock.restart();
         timer+=time;
+        temps+=time;
 
         Event e;
         while (window.pollEvent(e))
@@ -92,10 +100,11 @@ int main()
               if (e.key.code==Keyboard::Up) rotate=true;
               else if (e.key.code==Keyboard::Left) dx=-1;
               else if (e.key.code==Keyboard::Right) dx=1;
+              myGame.commande(e);
         }
 
     if (Keyboard::isKeyPressed(Keyboard::Down)) delay=0.05;
-
+    
     //// <- Move -> ///
     /*for (int i=0;i<4;i++)  { b[i]=a[i]; a[i].x+=dx; } //b est un tampon pour voir si le mouvement de a est valide
     if (!check()) for (int i=0;i<4;i++) a[i]=b[i];*/
@@ -145,7 +154,11 @@ int main()
 
          timer=0;
       }
-
+    if (myGame.updateGame(temps))
+    {
+      temps=0;
+    }
+    printf("%f\n",temps);
     ///////check lines//////////
     /*int k=M-1;
     for (int i=M-1;i>0;i--)
@@ -167,15 +180,15 @@ int main()
     window.draw(background);
           
     // affichage grille
-    /*for (int i=0;i<M;i++)
+    for (int i=0;i<M;i++)
      for (int j=0;j<N;j++)
        {
-         if (field[i][j]==0) continue;
-         s.setTextureRect(IntRect(field[i][j]*18,0,18,18));
+         if (myGame.grille.grille[i][j]==0) continue;
+         s.setTextureRect(IntRect(myGame.grille.grille[i][j]*18,0,18,18));
          s.setPosition(j*18,i*18);
          s.move(28,31); //offset
          window.draw(s);
-       }*/
+       }
     for (int i=0;i<M;i++)
      for (int j=0;j<N;j++)
        {
@@ -186,13 +199,13 @@ int main()
          window.draw(s);
        }
     //affichage pièce en déplacement
-    /*for (int i=0;i<4;i++)
+    for (int i=0;i<4;i++)
       {
-        s.setTextureRect(IntRect(colorNum*18,0,18,18));
-        s.setPosition(a[i].x*18,a[i].y*18);
+        s.setTextureRect(IntRect(myGame.piece.color*18,0,18,18));
+        s.setPosition(myGame.piece.courant[i].x*18,myGame.piece.courant[i].y*18);
         s.move(28,31); //offset
         window.draw(s);
-      }*/
+      }
 
     for (int i=0;i<4;i++)
       {
