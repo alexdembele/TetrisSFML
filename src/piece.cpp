@@ -17,6 +17,7 @@ int defPiece[7][4] =
 Piece::Piece()
 {
     int typePiece = rand()%7;
+    color=1+rand()%7;
          for (int i=0;i<4;i++)
            {
             courant[i].x = defPiece[typePiece][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
@@ -29,6 +30,7 @@ Piece::Piece()
 void Piece::reset()
 {
   int typePiece = rand()%7;
+  color=1+rand()%7;
          for (int i=0;i<4;i++)
            {
             courant[i].x = defPiece[typePiece][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
@@ -81,4 +83,13 @@ void Piece::move(int direction, Grille grille)
     }
   }
 
+}
+
+void Piece::descend()
+{
+  for (int i=0;i<4;i++) 
+  { 
+    tampon[i]=courant[i]; 
+    courant[i].y+=1; 
+  }
 }

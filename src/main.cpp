@@ -122,6 +122,7 @@ int main()
     if (timer>delay)
       {
         for (int i=0;i<4;i++) { b[i]=a[i]; a[i].y+=1; }
+        piec.descend();
 
         if (!check()) // si on ne peut plus bouger, on actualise le terrain et on créé une nouvelle pièce
         {
@@ -137,7 +138,8 @@ int main()
         }
         if (!piec.occupe(Ter))
         {
-          
+          Ter.ajoutePiece(piec);
+          piec.reset();
         }
 
          timer=0;
@@ -155,6 +157,7 @@ int main()
         }
         if (count<N) k--;
     }
+    Ter.clearLine();
 
     dx=0; rotate=0; delay=0.3;
 
@@ -172,12 +175,29 @@ int main()
          s.move(28,31); //offset
          window.draw(s);
        }
+    for (int i=0;i<M;i++)
+     for (int j=0;j<N;j++)
+       {
+         if (field[i][j]==0) continue;
+         s.setTextureRect(IntRect(Ter.grille[i][j]*18,0,18,18));
+         s.setPosition(j*18,i*18);
+         s.move(478,31); //offset
+         window.draw(s);
+       }
     //affichage pièce en déplacement
     for (int i=0;i<4;i++)
       {
         s.setTextureRect(IntRect(colorNum*18,0,18,18));
         s.setPosition(a[i].x*18,a[i].y*18);
         s.move(28,31); //offset
+        window.draw(s);
+      }
+
+    for (int i=0;i<4;i++)
+      {
+        s.setTextureRect(IntRect(piec.color*18,0,18,18));
+        s.setPosition(piec.courant[i].x*18,piec.courant[i].y*18);
+        s.move(478,31); //offset
         window.draw(s);
       }
 

@@ -31,5 +31,8 @@ void Grille::clearLine()
 
 void Grille::ajoutePiece(Piece piece)
 {
-
+    for (int i=0;i<4;i++) 
+    {
+        grille[piece.tampon[i].y][piece.tampon[i].x]=piece.color;
+    }
 }

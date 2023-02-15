@@ -20,6 +20,7 @@ class Piece
     public:
         point courant[4];
         point tampon[4];
+        int color;
 
 
     public:
@@ -29,6 +30,7 @@ class Piece
         void affichage();
         bool occupe( Grille grille);
         void reset();
+        void descend();
 }
 ;
 #endif
