@@ -97,8 +97,8 @@ int main()
     if (Keyboard::isKeyPressed(Keyboard::Down)) delay=0.05;
 
     //// <- Move -> ///
-    for (int i=0;i<4;i++)  { b[i]=a[i]; a[i].x+=dx; } //b est un tampon pour voir si le mouvement de a est valide
-    if (!check()) for (int i=0;i<4;i++) a[i]=b[i];
+    /*for (int i=0;i<4;i++)  { b[i]=a[i]; a[i].x+=dx; } //b est un tampon pour voir si le mouvement de a est valide
+    if (!check()) for (int i=0;i<4;i++) a[i]=b[i];*/
 
     piec.move(dx,Ter);
 
@@ -106,7 +106,7 @@ int main()
     //////Rotate//////
     if (rotate)
       {
-        Point p = a[1]; //center of rotation
+        /*Point p = a[1]; //center of rotation
         for (int i=0;i<4;i++)
           {
             int x = a[i].y-p.y;
@@ -114,15 +114,15 @@ int main()
             a[i].x = p.x - x;
             a[i].y = p.y + y;
            }
-           if (!check()) for (int i=0;i<4;i++) a[i]=b[i];// b est un tampon pour voir la rotation est valide
+           if (!check()) for (int i=0;i<4;i++) a[i]=b[i];// b est un tampon pour voir la rotation est valide*/
            piec.rotate(Ter);
       }
 
     ///////Tick//////
     if (timer>delay)
       {
-        for (int i=0;i<4;i++) { b[i]=a[i]; a[i].y+=1; }
-        piec.descend();
+        /*for (int i=0;i<4;i++) { b[i]=a[i]; a[i].y+=1; }
+        
 
         if (!check()) // si on ne peut plus bouger, on actualise le terrain et on créé une nouvelle pièce
         {
@@ -135,7 +135,8 @@ int main()
             a[i].x = figures[n][i] % 2 +4; //spawn au centre // A décaler pour le multijoueur
             a[i].y = figures[n][i] / 2;
            }
-        }
+        }*/
+        piec.descend();
         if (!piec.occupe(Ter))
         {
           Ter.ajoutePiece(piec);
@@ -146,7 +147,7 @@ int main()
       }
 
     ///////check lines//////////
-    int k=M-1;
+    /*int k=M-1;
     for (int i=M-1;i>0;i--)
     {
         int count=0;
@@ -156,7 +157,7 @@ int main()
             field[k][j]=field[i][j];
         }
         if (count<N) k--;
-    }
+    }*/
     Ter.clearLine();
 
     dx=0; rotate=0; delay=0.3;
@@ -166,7 +167,7 @@ int main()
     window.draw(background);
           
     // affichage grille
-    for (int i=0;i<M;i++)
+    /*for (int i=0;i<M;i++)
      for (int j=0;j<N;j++)
        {
          if (field[i][j]==0) continue;
@@ -174,24 +175,24 @@ int main()
          s.setPosition(j*18,i*18);
          s.move(28,31); //offset
          window.draw(s);
-       }
+       }*/
     for (int i=0;i<M;i++)
      for (int j=0;j<N;j++)
        {
-         if (field[i][j]==0) continue;
+         if (Ter.grille[i][j]==0) continue;
          s.setTextureRect(IntRect(Ter.grille[i][j]*18,0,18,18));
          s.setPosition(j*18,i*18);
          s.move(478,31); //offset
          window.draw(s);
        }
     //affichage pièce en déplacement
-    for (int i=0;i<4;i++)
+    /*for (int i=0;i<4;i++)
       {
         s.setTextureRect(IntRect(colorNum*18,0,18,18));
         s.setPosition(a[i].x*18,a[i].y*18);
         s.move(28,31); //offset
         window.draw(s);
-      }
+      }*/
 
     for (int i=0;i<4;i++)
       {
