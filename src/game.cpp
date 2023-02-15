@@ -10,6 +10,7 @@
 #include <time.h>
 #include<sstream>
 #include<iostream>
+#include <SFML/Graphics.hpp>
 
 Game::Game(Grille grille_, Piece piece_)
 {
@@ -26,7 +27,6 @@ void Game::commande(Event clavier)
     rotate=0;
     direction=0;
     delai=0.3;
-    Event e;
     if (clavier.type == Event::KeyPressed)
               if (clavier.key.code==Keyboard::Up) rotate=true;
               else if (clavier.key.code==Keyboard::Left) direction=-1;
@@ -70,4 +70,6 @@ bool Game::updateGame(float timer)
     }
     grille.clearLine();
     return tick;
+
+    
 }

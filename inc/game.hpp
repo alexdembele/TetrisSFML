@@ -13,13 +13,14 @@
 #include<iostream>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include "SFML/Graphics/Texture.hpp"
 
 using namespace sf;
 
 
 class Grille;
 class Piece;
-class Game
+class Game: public sf::Drawable
 {
 
     public:
@@ -34,7 +35,8 @@ class Game
     public:
         Game(Grille grille_, Piece piece_);
         void commande(Event clavier); // entree clavier
-        bool updateGame(float timer); // avanement du jeu
+        bool updateGame(float timer); // avancement du jeu
+        
 
 };
 #endif
