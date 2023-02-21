@@ -56,7 +56,7 @@ void Game::commande(Event clavier)
 bool Game::updateGame(float timer)
 {
     bool tick=false;
-    printf("%f:%f\n",timer,tempsTampon);
+    
     if((timer-tempsTampon)>0.07)
     {
         

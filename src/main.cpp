@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Network.hpp>
 #include <cmath>
 #include <vector>
 #include <time.h>
@@ -10,6 +11,7 @@
 #include"piece.hpp"
 #include"grille.hpp"
 #include"game.hpp"
+
 
 
 //TRICKY TOWER
@@ -83,6 +85,8 @@ int main()
     Game myGame(Tertest,piecTest);
     //definition temps
     float temps=0;
+    
+    //std::cout << sf::IpAddress::getPublicAddress( ) << "\n";
     while (window.isOpen())
     {
         float time = clock.getElapsedTime().asSeconds();
