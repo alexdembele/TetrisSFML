@@ -68,6 +68,17 @@ int main()
     //definition des parametres de jeu
     
     
+    sf::TcpSocket socket;
+    socket.setBlocking(false);
+    sf::Socket::Status status = socket.connect("147.250.86.228", 53000);
+    if (status != sf::Socket::Done)
+    {
+      printf("Erreur connection\n");
+    }
+    sf::Packet packet;
+    char data[100];
+
+
 
 
     Clock clock;
@@ -86,7 +97,7 @@ int main()
     //definition temps
     float temps=0;
     
-    //std::cout << sf::IpAddress::getPublicAddress( ) << "\n";
+    std::cout << sf::IpAddress::getPublicAddress( ) << "\n";
     while (window.isOpen())
     {
         float time = clock.getElapsedTime().asSeconds();
@@ -107,7 +118,9 @@ int main()
     
    
     
-
+    socket.receive(packet);
+    packet >> data;
+    printf("Reçu : %s",data);
         
     if (myGame.updateGame(temps))
     {
@@ -117,36 +130,9 @@ int main()
     
      
 
-   /* /////////draw//////////
-    window.clear(Color::Black);    
-    window.draw(background);
-          
-    // affichage grille
-    for (int i=0;i<M;i++)
-     for (int j=0;j<N;j++)
-       {
-         if (myGame.grille.grille[i][j]==0) continue;
-         s.setTextureRect(IntRect(myGame.grille.grille[i][j]*18,0,18,18));
-         s.setPosition(j*18,i*18);
-         s.move(28,31); //offset
-         window.draw(s);
-       }
    
-    //affichage pièce en déplacement
-    for (int i=0;i<4;i++)
-      {
-        s.setTextureRect(IntRect(myGame.piece.color*18,0,18,18));
-        s.setPosition(myGame.piece.courant[i].x*18,myGame.piece.courant[i].y*18);
-        s.move(28,31); //offset
-        window.draw(s);
-      }
-
-    
-
-    window.draw(frame);
-    window.draw(fram);*/
     window.draw(myGame);
-
+    
     window.display();
     }
 
