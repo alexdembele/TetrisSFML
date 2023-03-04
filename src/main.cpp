@@ -117,7 +117,7 @@ int main()
     
      
 
-    /////////draw//////////
+   /* /////////draw//////////
     window.clear(Color::Black);    
     window.draw(background);
           
@@ -144,7 +144,9 @@ int main()
     
 
     window.draw(frame);
-    window.draw(fram);
+    window.draw(fram);*/
+    window.draw(myGame);
+
     window.display();
     }
 
