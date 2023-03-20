@@ -41,6 +41,7 @@ class Game : public sf::Drawable
         Game(Grille grille_, Piece piece_);
         void commande(Event clavier); // entree clavier
         bool updateGame(float timer); // avancement du jeu
+        bool endGame();
         void draw(sf::RenderTarget& target, sf::RenderStates states) const ;
         
         

@@ -11,6 +11,7 @@
 #include<iostream>
 #include <SFML/Graphics.hpp>
 
+
 Game::Game(Grille grille_, Piece piece_)
 {
     grille=grille_;
@@ -135,4 +136,16 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       target.draw(FrameSprite_);
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
+}
+
+bool Game::endGame()
+{
+  for (int j=0; j<largeur; j++)
+  {
+    if (grille.grille[0][j]!=0)
+    {
+      return true;
+    }
+  } 
+  return false;
 }

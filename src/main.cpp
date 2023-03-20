@@ -80,7 +80,7 @@ int main()
 
 
 
-
+    
     Clock clock;
 
     //TEST
@@ -120,16 +120,19 @@ int main()
     
     socket.receive(packet);
     packet >> data;
-    printf("Reçu : %s",data);
-        
-    if (myGame.updateGame(temps))
+    //printf("Reçu : %s",data);
+    if (not(myGame.endGame()))
     {
-      temps=0;
+      if (myGame.updateGame(temps) )
+      {
+       temps=0;
+      }
     }
     
     
+    
      
-
+    std::cout << myGame.endGame() << std::endl;
    
     window.draw(myGame);
     
