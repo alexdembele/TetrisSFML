@@ -93,7 +93,7 @@ int main()
     Piece piecTest;
 
     //definition de la partie
-    Game myGame(Tertest,piecTest);
+    Game myGame(Tertest,piecTest,true);
     //definition temps
     float temps=0;
     
@@ -121,7 +121,7 @@ int main()
     socket.receive(packet);
     packet >> data;
     //printf("Reçu : %s",data);
-    if (not(myGame.endGame()))
+    if (not(myGame.end))
     {
       if (myGame.updateGame(temps) )
       {
@@ -131,8 +131,8 @@ int main()
     
     
     
-     
-    std::cout << myGame.endGame() << std::endl;
+    myGame.endGame();
+    std::cout << myGame.end << std::endl;
    
     window.draw(myGame);
     

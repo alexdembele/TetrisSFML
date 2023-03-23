@@ -31,17 +31,20 @@ class Game : public sf::Drawable
         float delai;
         float tempsTampon;
         float tempsTmp;
+        bool end;
+        bool local;
         //graphisme
         sf::Texture backgroundTexture_;
         sf::Texture PieceTexture_;
         sf::Texture FrameTexture_;
+        sf::Texture GameOverTexture_;
         
 
     public:
-        Game(Grille grille_, Piece piece_);
+        Game(Grille grille_, Piece piece_, bool localite);
         void commande(Event clavier); // entree clavier
         bool updateGame(float timer); // avancement du jeu
-        bool endGame();
+        void endGame();
         void draw(sf::RenderTarget& target, sf::RenderStates states) const ;
         
         

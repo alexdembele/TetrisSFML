@@ -12,7 +12,7 @@
 #include <SFML/Graphics.hpp>
 
 
-Game::Game(Grille grille_, Piece piece_)
+Game::Game(Grille grille_, Piece piece_,bool localite)
 {
     grille=grille_;
     piece=piece_;
@@ -20,6 +20,8 @@ Game::Game(Grille grille_, Piece piece_)
     rotate=0;
     delai=0.3;
     tempsTampon=0;
+    end=false;
+    local=localite;
 
     //chargement graphisme
     
@@ -29,10 +31,14 @@ Game::Game(Grille grille_, Piece piece_)
       printf("Erreur chargement\n");
     if(!FrameTexture_.loadFromFile("../Projet/images/frame.png"))
       printf("Erreur chargement\n");
+    if(!GameOverTexture_.loadFromFile("../Projet/images/gameOver.png"))
+      printf("Erreur chargement\n");
     sf::Sprite backgroundSprite_(backgroundTexture_);
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
+    sf::Sprite GameOverSprite_(GameOverTexture_);
     scaleToMinSize(backgroundSprite_,1900,1100);
+    scaleToMinSize(GameOverSprite_,1900,1100);
 }
 
 void Game::commande(Event clavier)
@@ -108,10 +114,13 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     sf::Sprite backgroundSprite_(backgroundTexture_);
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
+    sf::Sprite GameOverSprite_(GameOverTexture_);
+    target.clear(Color::Black);  
+    if (local)
+    {
     scaleToMinSize(backgroundSprite_,1900,1100);
-    target.clear(Color::Black);    
     target.draw(backgroundSprite_);
-          
+    }
     // affichage grille
     for (int i=0;i<hauteur;i++)
      for (int j=0;j<largeur;j++)
@@ -133,19 +142,27 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
         
 
       }
+      if (local)
+      {
       target.draw(FrameSprite_);
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
+      }
+      if(end)
+      {
+        target.draw(GameOverSprite_);
+      }
 }
 
-bool Game::endGame()
+void Game::endGame()
 {
   for (int j=0; j<largeur; j++)
   {
-    if (grille.grille[0][j]!=0)
+    if (grille.grille[1][j]!=0)
     {
-      return true;
+      std::cout << "Yousk2" <<std::endl;
+      end=true;
     }
   } 
-  return false;
+  
 }
