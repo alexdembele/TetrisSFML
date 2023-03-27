@@ -35,7 +35,32 @@ int figures[7][4] =
     3,5,7,6, // J
     2,3,4,5, // O
 };
+sf::Packet& operator <<(sf::Packet& packet, const Game& game)
+{
+     for (int i=0; i<20; i++)
+    {
+      for (int j=0;j<10;j++)
+      {
+        packet <<  game.grille.grille[i][j];
+      }
+     
+    }
+    return packet ;
+}
 
+sf::Packet& operator >>(sf::Packet& packet, Game& game)
+{
+    for (int i=0; i<20; i++)
+    {
+      for (int j=0;j<10;j++)
+      {
+        packet >>  game.grille.grille[i][j];
+      }
+     
+    }
+    
+    return packet ;
+}
 // regarde si la pièce peut se déplacer
 bool check()
 {
@@ -69,15 +94,15 @@ int main()
     
     
     sf::TcpSocket socket;
-    socket.setBlocking(false);
-    sf::Socket::Status status = socket.connect("147.250.86.228", 53000);
-    if (status != sf::Socket::Done)
+    //socket.setBlocking(false);
+    sf::Socket::Status status = socket.connect("147.250.2.201", 53000);
+    while(status != sf::Socket::Done)
     {
       printf("Erreur connection\n");
     }
     sf::Packet packet;
-    char data[100];
-
+    
+    
 
 
     
@@ -116,10 +141,10 @@ int main()
         }
 
     
-   
     
-    socket.receive(packet);
-    packet >> data;
+    packet << myGame;
+    socket.send(packet);
+    
     //printf("Reçu : %s",data);
     if (not(myGame.end))
     {
@@ -132,7 +157,7 @@ int main()
     
     
     myGame.endGame();
-    std::cout << myGame.end << std::endl;
+    
    
     window.draw(myGame);
     

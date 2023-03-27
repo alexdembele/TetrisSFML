@@ -14,6 +14,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include "SFML/Graphics/Texture.hpp"
+#include <SFML/Network.hpp>
 
 using namespace sf;
 
@@ -50,4 +51,5 @@ class Game : public sf::Drawable
         
 
 };
+
 #endif
