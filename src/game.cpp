@@ -23,6 +23,7 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     end=false;
     local=localite;
     score=0;
+    level=1;
 
     //chargement graphisme
     
@@ -105,7 +106,7 @@ bool Game::updateGame(float timer)
         tempsTmp=0;
         tick=true;
     }
-    score+=grille.clearLine();
+    score+=level*grille.clearLine();
     return tick;
 
     
@@ -162,9 +163,31 @@ void Game::endGame()
   {
     if (grille.grille[1][j]!=0)
     {
-      std::cout << "Yousk2" <<std::endl;
+      
       end=true;
     }
   } 
   
+}
+
+void Game::levelup()
+{
+  if (level<60)
+  {
+    while (score>(1000+level)*level)
+    {
+      level+=1;
+
+    }
+  }
+  if (level<=10)
+  {
+    delai-=0.02;
+  }
+  else if (level<=19)
+  {
+    delai-=0.01;
+  }
+  
+
 }

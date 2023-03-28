@@ -35,6 +35,7 @@ class Game : public sf::Drawable
         bool end;
         bool local;
         int score;
+        int level;
         //graphisme
         sf::Texture backgroundTexture_;
         sf::Texture PieceTexture_;
@@ -48,6 +49,7 @@ class Game : public sf::Drawable
         bool updateGame(float timer); // avancement du jeu
         void endGame();
         void draw(sf::RenderTarget& target, sf::RenderStates states) const ;
+        void levelup();
         
         
 
