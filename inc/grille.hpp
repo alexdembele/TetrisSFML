@@ -15,7 +15,7 @@ class Grille
         int grille[hauteur][largeur] ;
     public:
         Grille();
-        void clearLine();
+        int clearLine();
         void ajoutePiece(Piece piece);
         void affichage();
         

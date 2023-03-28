@@ -34,6 +34,7 @@ class Game : public sf::Drawable
         float tempsTmp;
         bool end;
         bool local;
+        int score;
         //graphisme
         sf::Texture backgroundTexture_;
         sf::Texture PieceTexture_;

@@ -13,8 +13,10 @@ Grille::Grille()
       }
     }
 }
-void Grille::clearLine()
+int Grille::clearLine()
 {
+    int nb_supprime=0;
+    int score=0;
     int k=hauteur-1;
     for (int i=hauteur-1;i>0;i--)
     {
@@ -25,7 +27,13 @@ void Grille::clearLine()
             grille[k][j]=grille[i][j];
         }
         if (count<largeur) k--;
+        else nb_supprime+=1;
     }
+    if (nb_supprime==1) return 40;
+    else if (nb_supprime==2) return 100;
+    else if (nb_supprime==3) return 300;
+    else if (nb_supprime==4) return 1200;
+    else return 0;    
 
 }
 

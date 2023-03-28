@@ -22,6 +22,7 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     tempsTampon=0;
     end=false;
     local=localite;
+    score=0;
 
     //chargement graphisme
     
@@ -76,6 +77,7 @@ bool Game::updateGame(float timer)
 {
     bool tick=false;
     
+    
     if((timer-tempsTampon)>0.07)
     {
         
@@ -103,7 +105,7 @@ bool Game::updateGame(float timer)
         tempsTmp=0;
         tick=true;
     }
-    grille.clearLine();
+    score+=grille.clearLine();
     return tick;
 
     

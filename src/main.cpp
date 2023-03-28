@@ -94,9 +94,9 @@ int main()
     
     
     sf::TcpSocket socket;
-    //socket.setBlocking(false);
-    sf::Socket::Status status = socket.connect("147.250.2.201", 53000);
-    while(status != sf::Socket::Done)
+    socket.setBlocking(false);
+    sf::Socket::Status status = socket.connect("147.250.87.166", 53000);
+    if(status != sf::Socket::Done)
     {
       printf("Erreur connection\n");
     }
@@ -151,6 +151,7 @@ int main()
       if (myGame.updateGame(temps) )
       {
        temps=0;
+       printf("%d\n",myGame.score);
       }
     }
     
