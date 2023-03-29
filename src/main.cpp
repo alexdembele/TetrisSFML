@@ -101,8 +101,11 @@ int main()
       printf("Erreur connection\n");
     }
     sf::Packet packet;
-    packet <<"Yousk2" ;
+    std::string data ="Yousk2";
     
+    std::cout << data<< std::endl;
+    packet <<data ;
+    socket.send(packet);
     
 
 
