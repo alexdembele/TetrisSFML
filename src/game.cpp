@@ -52,14 +52,14 @@ void Game::commande(Event clavier)
 {
     rotate=0;
     direction=0;
-    delai=0.3;
+    delais=delai;
     if (clavier.type == Event::KeyPressed)
               if (clavier.key.code==Keyboard::Up) rotate=true;
               else if (clavier.key.code==Keyboard::Left) direction=-1;
               else if (clavier.key.code==Keyboard::Right) direction=1;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) 
     {
-        delai=0.05;
+        delais=0.05;
     }
     //eclair
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) 
@@ -77,6 +77,11 @@ void Game::commande(Event clavier)
     {
         
     }
+    //meteorite
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) 
+    {
+        
+    }
 }
 
 bool Game::updateGame(float timer)
@@ -84,14 +89,14 @@ bool Game::updateGame(float timer)
     bool tick=false;
     
     
-    if((timer-tempsTampon)>0.07)
+    if((timer-tempsTampon)>0.05)
     {
         
         piece.move(direction,grille);
         
         tempsTampon=timer;
     }
-    if((timer-tempsTmp)>0.1)
+    if((timer-tempsTmp)>delai/2)
     {
         if(rotate)
         {
@@ -99,7 +104,7 @@ bool Game::updateGame(float timer)
         }
         tempsTmp=timer;
     }
-    if(timer>delai)
+    if(timer>delais)
     {
         piece.descend();
         if(!piece.occupe(grille))
@@ -192,20 +197,24 @@ void Game::levelup()
 {
   if (level<60)
   {
-    while (score>(1000+level)*level)
+    while (score>(1000+level*200)*level)
     {
       level+=1;
+      if (level<=10)
+        {
+          delai-=0.02;
+        }
+      else if (level<=15)
+        {
+          delai-=0.01;
+        }
+      else
+      {
 
+      }
     }
   }
-  if (level<=10)
-  {
-    delai-=0.02;
-  }
-  else if (level<=19)
-  {
-    delai-=0.01;
-  }
+  
   
 
 }

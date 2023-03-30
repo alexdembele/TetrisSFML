@@ -30,6 +30,7 @@ class Game : public sf::Drawable
         int direction;
         bool rotate;
         float delai;
+        float delais;
         float tempsTampon;
         float tempsTmp;
         bool end;

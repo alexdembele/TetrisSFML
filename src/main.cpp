@@ -160,7 +160,7 @@ int main()
     }
     
     
-    
+    myGame.levelup();
     myGame.endGame();
     
    
