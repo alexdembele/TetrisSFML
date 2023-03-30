@@ -39,6 +39,11 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
     sf::Sprite GameOverSprite_(GameOverTexture_);
+    
+    if (!policeTexte.loadFromFile("../Projet/Fredoka-Bold.ttf"))
+    {
+      printf("Erreur chargement\n");
+    }
     scaleToMinSize(backgroundSprite_,1900,1100);
     scaleToMinSize(GameOverSprite_,1900,1100);
 }
@@ -118,6 +123,17 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
     sf::Sprite GameOverSprite_(GameOverTexture_);
+    sf::Text textScore;
+    textScore.setFont(policeTexte);
+    textScore.setCharacterSize(24);
+    textScore.setFillColor(sf::Color::Magenta);
+    std::string Scores=std::to_string(score);
+    std::string Levels=std::to_string(level);
+    textScore.setString("Score:"+Scores+"   Level:"+Levels);
+    textScore.move(0, 400.f);
+    
+    
+    
     target.clear(Color::Black);  
     if (local)
     {
@@ -145,12 +161,14 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
         
 
       }
+
       if (local)
       {
       target.draw(FrameSprite_);
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
       }
+      target.draw(textScore);
       if(end)
       {
         target.draw(GameOverSprite_);

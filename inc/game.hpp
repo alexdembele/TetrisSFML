@@ -41,6 +41,8 @@ class Game : public sf::Drawable
         sf::Texture PieceTexture_;
         sf::Texture FrameTexture_;
         sf::Texture GameOverTexture_;
+        sf::Font policeTexte;
+
         
 
     public:

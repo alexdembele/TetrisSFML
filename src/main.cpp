@@ -92,7 +92,7 @@ int main()
 
     //definition des parametres de jeu
     
-    
+    /* Reseau
     sf::TcpSocket socket;
     //socket.setBlocking(false);
     sf::Socket::Status status = socket.connect("147.250.226.73",52000);
@@ -106,7 +106,7 @@ int main()
     std::cout << data<< std::endl;
     packet <<data ;
     socket.send(packet);
-    
+    */
 
 
     
@@ -155,7 +155,7 @@ int main()
       if (myGame.updateGame(temps) )
       {
        temps=0;
-       printf("%d\n",myGame.score);
+       
       }
     }
     
