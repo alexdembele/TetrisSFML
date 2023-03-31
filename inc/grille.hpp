@@ -17,7 +17,8 @@ class Grille
         Grille();
         int clearLine();
         void ajoutePiece(Piece piece);
-        void affichage();
+        
+        void eclairTombe();
         
 };
 

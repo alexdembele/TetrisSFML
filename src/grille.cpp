@@ -1,7 +1,8 @@
 #include "grille.hpp"
 #include "piece.hpp"
 #include <SFML/System.hpp>
-
+#include<sstream>
+#include<iostream>
 
 Grille::Grille()
 {
@@ -42,5 +43,27 @@ void Grille::ajoutePiece(Piece piece)
     for (int i=0;i<4;i++) 
     {
         grille[piece.tampon[i].y][piece.tampon[i].x]=piece.color;
+    }
+}
+
+void Grille::eclairTombe()
+{
+    int i=0;
+    int j=0;
+    int quantite=4;
+    while(quantite>0 && i<hauteur)
+    {
+        std::cout << i<<j<<"\n ";
+        while(j<largeur && quantite>0)
+        {
+            if(grille[i][j])
+            {
+                grille[i][j]=0;
+                quantite-=1;
+            }
+            j++;
+        }
+        j=0;
+        i++;
     }
 }

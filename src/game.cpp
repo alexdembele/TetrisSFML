@@ -24,7 +24,7 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     local=localite;
     score=0;
     level=1;
-    eclairTimer=1000;
+    eclairTimer=100000;
     eclairReady=false;
 
     //chargement graphisme
@@ -37,10 +37,13 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
       printf("Erreur chargement\n");
     if(!GameOverTexture_.loadFromFile("../Projet/images/gameOver.png"))
       printf("Erreur chargement\n");
+    if(!eclairTexture_.loadFromFile("../Projet/images/eclair.png"))
+      printf("Erreur chargement\n");
     sf::Sprite backgroundSprite_(backgroundTexture_);
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
     sf::Sprite GameOverSprite_(GameOverTexture_);
+    sf::Sprite eclairSprite_(eclairTexture_);
     
     if (!policeTexte.loadFromFile("../Projet/Fredoka-Bold.ttf"))
     {
@@ -65,17 +68,14 @@ void Game::commande(Event clavier)
         delais=0.05;
     }
     //eclair
-    if (eclairTimer>0)
+    
+    
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)&&eclairReady&&score>1000) 
     {
-      eclairTimer-=1;
-      if (eclairTimer==0)
-      {
-        eclairReady=true;
-      }
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)&&eclairReady) 
-    {
-        eclairTimer=1000;
+        grille.eclairTombe();
+        score-=1000;
+        eclairTimer=100000;
         eclairReady=false;
     }
     
@@ -100,6 +100,14 @@ bool Game::updateGame(float timer)
 {
     bool tick=false;
     
+    if (eclairTimer>0)
+    {
+      eclairTimer-=1;
+      if (eclairTimer==0)
+      {
+        eclairReady=true;
+      }
+    }
     
     if((timer-tempsTampon)>0.05)
     {
@@ -140,6 +148,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
     sf::Sprite GameOverSprite_(GameOverTexture_);
+    sf::Sprite eclairSprite_(eclairTexture_);
     sf::Text textScore;
     textScore.setFont(policeTexte);
     textScore.setCharacterSize(24);
@@ -184,8 +193,14 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       target.draw(FrameSprite_);
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
-      }
       target.draw(textScore);
+      eclairSprite_.move(Vector2f(0,450.f));
+      eclairSprite_.scale(0.1f,0.07f);
+      if (eclairReady) target.draw(eclairSprite_);
+      }
+
+      
+
       GameOverSprite_.scale(1.f, 2.05f);
       if(end)
       {
