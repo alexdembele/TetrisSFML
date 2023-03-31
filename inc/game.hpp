@@ -44,6 +44,12 @@ class Game : public sf::Drawable
         sf::Texture GameOverTexture_;
         sf::Font policeTexte;
 
+        //pouvoir speciaux
+        bool eclairReady;
+        int eclairTimer;
+
+        
+
         
 
     public:

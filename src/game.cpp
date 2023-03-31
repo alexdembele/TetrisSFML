@@ -24,6 +24,8 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     local=localite;
     score=0;
     level=1;
+    eclairTimer=1000;
+    eclairReady=false;
 
     //chargement graphisme
     
@@ -46,6 +48,7 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     }
     scaleToMinSize(backgroundSprite_,1900,1100);
     scaleToMinSize(GameOverSprite_,1900,1100);
+    
 }
 
 void Game::commande(Event clavier)
@@ -62,11 +65,20 @@ void Game::commande(Event clavier)
         delais=0.05;
     }
     //eclair
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) 
+    if (eclairTimer>0)
     {
-        
+      eclairTimer-=1;
+      if (eclairTimer==0)
+      {
+        eclairReady=true;
+      }
     }
-
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)&&eclairReady) 
+    {
+        eclairTimer=1000;
+        eclairReady=false;
+    }
+    
     //supprime ligne
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) 
     {
@@ -174,6 +186,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       target.draw(FrameSprite_);
       }
       target.draw(textScore);
+      GameOverSprite_.scale(1.f, 2.05f);
       if(end)
       {
         target.draw(GameOverSprite_);
