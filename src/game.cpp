@@ -26,6 +26,8 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     level=1;
     eclairTimer=100000;
     eclairReady=false;
+    asteroideTimer=500000;
+    asteroideReady=false;
 
     //chargement graphisme
     
@@ -39,11 +41,15 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
       printf("Erreur chargement\n");
     if(!eclairTexture_.loadFromFile("../Projet/images/eclair.png"))
       printf("Erreur chargement\n");
+    if(!asteroideTexture_.loadFromFile("../Projet/images/asteroide.png"))
+      printf("Erreur chargement\n");
     sf::Sprite backgroundSprite_(backgroundTexture_);
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
     sf::Sprite GameOverSprite_(GameOverTexture_);
     sf::Sprite eclairSprite_(eclairTexture_);
+    sf::Sprite asteroideSprite_(asteroideTexture_);
+    
     
     if (!policeTexte.loadFromFile("../Projet/Fredoka-Bold.ttf"))
     {
@@ -87,11 +93,16 @@ void Game::commande(Event clavier)
     //supprime colonne
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) 
     {
+      
         
     }
     //meteorite
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)&&asteroideReady) 
     {
+        grille.asteroideTombe();
+        score-=10000;
+        asteroideTimer=500000;
+        asteroideReady=false;
         
     }
 }
@@ -106,6 +117,15 @@ bool Game::updateGame(float timer)
       if (eclairTimer==0)
       {
         eclairReady=true;
+      }
+    }
+
+    if (asteroideTimer>0)
+    {
+      asteroideTimer-=1;
+      if (asteroideTimer==0)
+      {
+        asteroideReady=true;
       }
     }
     
@@ -149,6 +169,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     sf::Sprite FrameSprite_(FrameTexture_);
     sf::Sprite GameOverSprite_(GameOverTexture_);
     sf::Sprite eclairSprite_(eclairTexture_);
+    sf::Sprite asteroideSprite_(asteroideTexture_);
     sf::Text textScore;
     textScore.setFont(policeTexte);
     textScore.setCharacterSize(24);
@@ -194,9 +215,15 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
       target.draw(textScore);
+      //eclair
       eclairSprite_.move(Vector2f(0,450.f));
       eclairSprite_.scale(0.1f,0.07f);
-      if (eclairReady) target.draw(eclairSprite_);
+      if (eclairReady&&score>1000) target.draw(eclairSprite_);
+      //asteroide
+      target.draw(eclairSprite_);
+      asteroideSprite_.move(Vector2f(100.f,450.f));
+      asteroideSprite_.scale(0.3f,0.3f);
+      if (asteroideReady&&score>10000) target.draw(asteroideSprite_);
       }
 
       

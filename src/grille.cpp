@@ -3,6 +3,7 @@
 #include <SFML/System.hpp>
 #include<sstream>
 #include<iostream>
+#include <time.h> 
 
 Grille::Grille()
 {
@@ -66,4 +67,24 @@ void Grille::eclairTombe()
         j=0;
         i++;
     }
+}
+
+void Grille::asteroideTombe()
+{
+    int r=rand() % 9+ 1;
+    int i=0;
+    while(!grille[i][r-1]&&!grille[i][r]&&!grille[i][r+1])
+    {
+        i++;
+
+    }
+    grille[i-3][r-1]=1;
+    grille[i-3][r]=1;
+    grille[i-3][r+1]=1;
+    grille[i-1][r-1]=1;
+    grille[i-1][r]=1;
+    grille[i-1][r+1]=1;
+    grille[i-2][r-1]=1;
+    grille[i-2][r]=1;
+    grille[i-2][r+1]=1;
 }

@@ -27,7 +27,6 @@ class Piece
         Piece();//construit une pièce aléatoirement dans la grille spécifié
         void rotate(Grille grille);
         void move(int direcion, Grille grille);
-        void affichage();
         bool occupe( Grille grille);
         void reset();
         void descend();

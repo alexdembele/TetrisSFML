@@ -19,6 +19,9 @@ class Grille
         void ajoutePiece(Piece piece);
         
         void eclairTombe();
+        void asteroideTombe();
+        void suppLigne();
+        void suppColonne();
         
 };
 
