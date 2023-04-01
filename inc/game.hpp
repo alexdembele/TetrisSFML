@@ -27,6 +27,7 @@ class Game : public sf::Drawable
     public:
         Grille grille;
         Piece piece;
+        Piece Preview;
         int direction;
         bool rotate;
         float delai;

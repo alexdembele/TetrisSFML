@@ -15,7 +15,9 @@
 Game::Game(Grille grille_, Piece piece_,bool localite)
 {
     grille=grille_;
-    piece=piece_;
+   
+    Preview=piece_;
+    piece=Piece();
     direction=0;
     rotate=0;
     delai=0.3;
@@ -193,7 +195,8 @@ bool Game::updateGame(float timer)
         if(!piece.occupe(grille))
         {
             grille.ajoutePiece(piece);
-            piece.reset();
+            piece=Preview;
+            Preview.reset();
         }
         tempsTampon=0;
         tempsTmp=0;
@@ -259,8 +262,14 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
         PieceSprite_.setPosition(piece.courant[i].x*18,piece.courant[i].y*18);
         PieceSprite_.move(28,31); //offset
         target.draw(PieceSprite_);
-        
-
+      }
+    //affichage Preview
+    for (int i=0;i<4;i++)
+      {
+        PieceSprite_.setTextureRect(IntRect(Preview.color*18,0,18,18));
+        PieceSprite_.setPosition(Preview.courant[i].x*18,Preview.courant[i].y*18);
+        PieceSprite_.move(170,31); //offset
+        target.draw(PieceSprite_);
       }
 
       if (local)

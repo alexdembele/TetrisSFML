@@ -61,15 +61,7 @@ sf::Packet& operator >>(sf::Packet& packet, Game& game)
     
     return packet ;
 }
-// regarde si la pièce peut se déplacer
-bool check()
-{
-   for (int i=0;i<4;i++)
-      if (a[i].x<0 || a[i].x>=N || a[i].y>=M) return 0;
-      else if (field[a[i].y][a[i].x]) return 0;
 
-   return 1;
-};
 
 
 int main()
@@ -78,18 +70,7 @@ int main()
     //chargement graphisme
     RenderWindow window(VideoMode(1800, 1000), "The Game!");
 
-    Texture t1,t2,t3;
-    if(!t1.loadFromFile("../Projet/images/tiles.png"))
-      printf("Erreur chargement\n");
-    if(!t2.loadFromFile("../Projet/images/background.png"))
-      printf("Erreur chargement\n");
-    if(!t3.loadFromFile("../Projet/images/frame.png"))
-      printf("Erreur chargement\n");
     
-    Sprite s(t1), background(t2), frame(t3),fram(t3);
-    fram.move(Vector2f(450.f,0));
-    scaleToMinSize(background,1900,1100);
-
     //definition des parametres de jeu
     
     /* Reseau
