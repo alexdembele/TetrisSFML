@@ -127,6 +127,7 @@ int main()
     float temps=0;
     
     std::cout << sf::IpAddress::getPublicAddress( ) << "\n";
+  
     while (window.isOpen())
     {
         float time = clock.getElapsedTime().asSeconds();
@@ -150,7 +151,7 @@ int main()
     socket.send(packet);*/
     
     //printf("Reçu : %s",data);
-    if (not(myGame.end))
+    if (not(myGame.end)&&!myGame.afficheMenu)
     {
       if (myGame.updateGame(temps) )
       {

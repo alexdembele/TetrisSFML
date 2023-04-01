@@ -24,6 +24,7 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     local=localite;
     score=0;
     level=1;
+    afficheMenu=true;
     eclairTimer=100000;
     eclairReady=false;
     asteroideTimer=500000;
@@ -49,6 +50,8 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
       printf("Erreur chargement\n");
     if(!interditTexture_.loadFromFile("../Projet/images/interdit.png"))
       printf("Erreur chargement\n");
+    if(!menuTexture_.loadFromFile("../Projet/images/menu.jpg"))
+      printf("Erreur chargement\n");
     
     sf::Sprite backgroundSprite_(backgroundTexture_);
     sf::Sprite PieceSprite_(PieceTexture_);
@@ -58,6 +61,7 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     sf::Sprite asteroideSprite_(asteroideTexture_);
     sf::Sprite colonneSprite_(interditTexture_);
     sf::Sprite ligneSprite_(interditTexture_);
+    sf::Sprite menuSprite_(menuTexture_);
 
     
     
@@ -75,6 +79,10 @@ void Game::commande(Event clavier)
     rotate=0;
     direction=0;
     delais=delai;
+     if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) 
+    {
+      afficheMenu=false;
+    }
     if (clavier.type == Event::KeyPressed)
               if (clavier.key.code==Keyboard::Up) rotate=true;
               else if (clavier.key.code==Keyboard::Left) direction=-1;
@@ -207,16 +215,23 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     sf::Sprite asteroideSprite_(asteroideTexture_);
     sf::Sprite colonneSprite_(interditTexture_);
     sf::Sprite ligneSprite_(interditTexture_);
+    sf::Sprite menuSprite_(menuTexture_);
     setOriginToCenter(ligneSprite_);
     setOriginToCenter(colonneSprite_);
     sf::Text textScore;
+    sf::Text textMenu;
     textScore.setFont(policeTexte);
+    textMenu.setFont(policeTexte);
     textScore.setCharacterSize(24);
     textScore.setFillColor(sf::Color::Magenta);
+    textMenu.setCharacterSize(40);
+    textMenu.setFillColor(sf::Color::Black);
     std::string Scores=std::to_string(score);
     std::string Levels=std::to_string(level);
     textScore.setString("Score:"+Scores+"   Level:"+Levels);
     textScore.move(0, 400.f);
+    textMenu.setString("Press P to play Solo\nPress Q to play Multi");
+
     
     
     
@@ -281,6 +296,15 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       if(end)
       {
         target.draw(GameOverSprite_);
+      }
+
+      if(local&&afficheMenu)
+      {
+      
+        scaleToMaxSize(menuSprite_,1900,1100);
+        target.draw(menuSprite_);
+        target.draw(textMenu);
+    
       }
 }
 

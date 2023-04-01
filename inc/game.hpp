@@ -37,6 +37,7 @@ class Game : public sf::Drawable
         bool local;
         int score;
         int level;
+        bool afficheMenu;
         //graphisme
         sf::Texture backgroundTexture_;
         sf::Texture PieceTexture_;
@@ -45,6 +46,7 @@ class Game : public sf::Drawable
         sf::Texture eclairTexture_;
         sf::Texture interditTexture_;
         sf::Texture asteroideTexture_;
+        sf::Texture menuTexture_;
         sf::Font policeTexte;
 
         //pouvoir speciaux
