@@ -301,7 +301,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
       
 
-      GameOverSprite_.scale(1.f, 2.05f);
+      GameOverSprite_.scale(1.2f, 2.05f);
       if(end)
       {
         target.draw(GameOverSprite_);
