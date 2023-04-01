@@ -28,6 +28,10 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     eclairReady=false;
     asteroideTimer=500000;
     asteroideReady=false;
+    ligneTimer=100000;
+    ligneReady=false;
+    colonneTimer=200000;
+    colonneReady=false;
 
     //chargement graphisme
     
@@ -43,12 +47,18 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
       printf("Erreur chargement\n");
     if(!asteroideTexture_.loadFromFile("../Projet/images/asteroide.png"))
       printf("Erreur chargement\n");
+    if(!interditTexture_.loadFromFile("../Projet/images/interdit.png"))
+      printf("Erreur chargement\n");
+    
     sf::Sprite backgroundSprite_(backgroundTexture_);
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
     sf::Sprite GameOverSprite_(GameOverTexture_);
     sf::Sprite eclairSprite_(eclairTexture_);
     sf::Sprite asteroideSprite_(asteroideTexture_);
+    sf::Sprite colonneSprite_(interditTexture_);
+    sf::Sprite ligneSprite_(interditTexture_);
+
     
     
     if (!policeTexte.loadFromFile("../Projet/Fredoka-Bold.ttf"))
@@ -86,18 +96,25 @@ void Game::commande(Event clavier)
     }
     
     //supprime ligne
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)&&ligneReady&&score>1000) 
     {
+        grille.suppLigne();
+        score-=1000;
+        ligneTimer=100000;
+        ligneReady=false;
         
     }
     //supprime colonne
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)&&colonneReady&&score>5000) 
     {
-      
+        grille.suppColonne();
+        score-=5000;
+        colonneTimer=200000;
+        colonneReady=false;
         
     }
     //meteorite
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)&&asteroideReady) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)&&asteroideReady&&score>10000) 
     {
         grille.asteroideTombe();
         score-=10000;
@@ -126,6 +143,24 @@ bool Game::updateGame(float timer)
       if (asteroideTimer==0)
       {
         asteroideReady=true;
+      }
+    }
+
+    if (ligneTimer>0)
+    {
+      ligneTimer-=1;
+      if (ligneTimer==0)
+      {
+        ligneReady=true;
+      }
+    }
+
+    if (colonneTimer>0)
+    {
+      colonneTimer-=1;
+      if (colonneTimer==0)
+      {
+        colonneReady=true;
       }
     }
     
@@ -170,6 +205,10 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     sf::Sprite GameOverSprite_(GameOverTexture_);
     sf::Sprite eclairSprite_(eclairTexture_);
     sf::Sprite asteroideSprite_(asteroideTexture_);
+    sf::Sprite colonneSprite_(interditTexture_);
+    sf::Sprite ligneSprite_(interditTexture_);
+    setOriginToCenter(ligneSprite_);
+    setOriginToCenter(colonneSprite_);
     sf::Text textScore;
     textScore.setFont(policeTexte);
     textScore.setCharacterSize(24);
@@ -224,6 +263,16 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       asteroideSprite_.move(Vector2f(100.f,450.f));
       asteroideSprite_.scale(0.3f,0.3f);
       if (asteroideReady&&score>10000) target.draw(asteroideSprite_);
+      //ligne
+      ligneSprite_.move(Vector2f(160.f,650.f));
+      ligneSprite_.rotate(-45);
+      ligneSprite_.scale(0.1f,0.1f);
+       if(ligneReady&&score>1000) target.draw(ligneSprite_);
+      //colonne
+      colonneSprite_.move(Vector2f(50.f,650.f));
+      colonneSprite_.rotate(45);
+      colonneSprite_.scale(0.1f,0.1f);
+       if(colonneReady&&score>5000) target.draw(colonneSprite_);
       }
 
       

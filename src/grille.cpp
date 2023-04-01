@@ -88,3 +88,36 @@ void Grille::asteroideTombe()
     grille[i-2][r]=1;
     grille[i-2][r+1]=1;
 }
+
+void Grille::suppColonne()
+{
+    int r=rand() % 11;
+    for(int i=0;i<hauteur;i++)
+    {
+        grille[i][r]=0;
+    }
+}
+
+void Grille::suppLigne()
+{
+    int i=0;
+    int j=0;
+    bool flag=true;
+    while( i<hauteur&&flag)
+    {
+        while(j<largeur&&flag)
+        {
+            if(grille[i][j])
+            {
+                flag=false;
+            }
+            j++;
+        }
+        j=0;
+        i++;
+    }
+    for(int u=0; u<largeur;u++)
+    {
+        grille[i][u]=0;
+    }
+}

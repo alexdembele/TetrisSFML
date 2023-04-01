@@ -43,8 +43,7 @@ class Game : public sf::Drawable
         sf::Texture FrameTexture_;
         sf::Texture GameOverTexture_;
         sf::Texture eclairTexture_;
-        sf::Texture ligneTexture_;
-        sf::Texture colonneTexture_;
+        sf::Texture interditTexture_;
         sf::Texture asteroideTexture_;
         sf::Font policeTexte;
 
