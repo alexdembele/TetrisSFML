@@ -87,7 +87,7 @@ int main()
      //Reseau
     sf::TcpSocket socket;
     //socket.setBlocking(false);
-    sf::Socket::Status status = socket.connect("147.250.224.152",52000);
+    sf::Socket::Status status = socket.connect("147.250.224.164",52000);
     if(status != sf::Socket::Done)
     {
       printf("Erreur connection\n");
