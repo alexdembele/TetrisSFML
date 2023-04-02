@@ -28,46 +28,13 @@ struct Point
 //piece et commande avec borne => def protocole
 sf::Packet& operator <<(sf::Packet& packet, const Game& game)
 {
-    std::string buffer;
+    std::int16_t buffer;
      for (int i=0; i<20; i++)
     {
       for (int j=0;j<10;j++)
       {
-        if (game.grille.grille[i][j]==1)
-        {
-          buffer="b";
-          
-        }
-        else if (game.grille.grille[i][j]==2)
-        {
-          buffer="c";
-          
-        }
-        else if (game.grille.grille[i][j]==3)
-        {
-          buffer="d";
-        }
-        else if (game.grille.grille[i][j]==4)
-        {
-          buffer="e";
-        }
-        else if (game.grille.grille[i][j]==5)
-        {
-          buffer="f";
-        }
-        else if (game.grille.grille[i][j]==6)
-        {
-          buffer="g";
-        }
-        else if (game.grille.grille[i][j]==7)
-        {
-          buffer="h";
-        }
-        else
-        {
-          buffer="a";
-        }
-        packet <<    buffer;
+        buffer=game.grille.grille[i][j];
+        packet <<  buffer;
         std::cout<<buffer<<";";
       }
      
@@ -78,45 +45,15 @@ sf::Packet& operator <<(sf::Packet& packet, const Game& game)
 
 sf::Packet& operator >>(sf::Packet& packet, Game& game)
 {
-  std::string buffer;
+  std::int16_t buffer;
     for (int i=0; i<20; i++)
     {
       for (int j=0;j<10;j++)
       {
 
         packet >> buffer;
-        if (buffer==std::string("b"))
-        {
-          game.grille.grille[i][j]==1;
-        }
-        else if (buffer==std::string("c"))
-        {
-          game.grille.grille[i][j]==2;
-        }
-        else if (buffer==std::string("d"))
-        {
-          game.grille.grille[i][j]==3;
-        }
-        else if (buffer==std::string("e"))
-        {
-          game.grille.grille[i][j]==4;
-        }
-        else if (buffer==std::string("f"))
-        {
-          game.grille.grille[i][j]==5;
-        }
-        else if (buffer==std::string("g"))
-        {
-          game.grille.grille[i][j]==6;
-        }
-        else if (buffer==std::string("h"))
-        {
-          game.grille.grille[i][j]==7;
-        }
-        else
-        {
-          game.grille.grille[i][j]==0;
-        }
+        game.grille.grille[i][j]=buffer;
+        
         
       }
      
@@ -146,7 +83,7 @@ int main()
     sf::Packet packet;
     std::string data ="Yousk2";
     std::string datta="Yousk1";
-    std::int16_t azer=42;
+    
     
     std::cout << data<< std::endl;
     packet <<data ;
