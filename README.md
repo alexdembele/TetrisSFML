@@ -27,7 +27,7 @@ Construire le projet
 -make  
 
 ***Attention*** 
-Dans mon code, le dossier s'appelle projet, il faut renommer les chemins d'inclusions pour avoir les graphismes; cela se trouve dans le constructeur de la classe Game. 
+Dans mon code, le dossier s'appelle projet, il faut renommer les chemins d'inclusions pour avoir les graphismes; cela se trouve dans le constructeur de la classe Game. De plus, pour le mutlijoueur, il faut mettre l'ip du serveur en dur dans le code (main du joueur) car la fonction de sfml renvoie une mauvaise IP.
 
 
 Exécuter le projet  
