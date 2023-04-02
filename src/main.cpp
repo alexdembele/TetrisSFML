@@ -142,7 +142,7 @@ int main()
             if (e.type == Event::Closed)
                 window.close();
 
-            
+              //prise des commandes claviers
               myGame.commande(e);
         }
 
@@ -154,7 +154,7 @@ int main()
     
     
     
-    //printf("Reçu : %s",data);
+    //Actualisation grille
     if (not(myGame.end)&&!myGame.afficheMenu)
     {
       if (myGame.updateGame(temps) )
@@ -164,21 +164,22 @@ int main()
        
       }
     }
+    //echange reseau
     if(tempsReseau>1)
     {
     tempsReseau=0;
     packet.clear();
     packet << myGame;
-    //packet <<"Yousk1";
+    
     socket.send(packet);
-    //reception grille
+    
     packet.clear();
     socket.receive(packet);
-    //std::cout <<packet<<"\n";
+    
     packet>>gameReseau;
     packet.clear();
     }
-    
+    //verification de l'état du jeu
     myGame.levelup();
     myGame.endGame();
     

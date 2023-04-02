@@ -33,5 +33,6 @@ Dans mon code, le dossier s'appelle projet, il faut renommer les chemins d'inclu
 Exécuter le projet  
 -./sfml-app
 
-Pour jouer en multijoueur, il faut lancer le server avant de lancer les joueurs. 
+Pour jouer en multijoueur, il faut lancer le server avant de lancer les joueurs.  
+Il y a des pouvoirs spéciaux. Si vous voulez les essayer simplement, vous pouvez réduire leur délai d'apparition à 1000 dans la classe game.
 
