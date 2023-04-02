@@ -28,13 +28,13 @@ Game::Game(Grille grille_, Piece piece_,bool localite)
     level=1;
     afficheMenu=true;
     eclairTimer=100000;
-    eclairReady=false;
+    eclairReady=true;
     asteroideTimer=500000;
-    asteroideReady=false;
+    asteroideReady=true;
     ligneTimer=100000;
-    ligneReady=false;
+    ligneReady=true;
     colonneTimer=200000;
-    colonneReady=false;
+    colonneReady=true;
 
     //chargement graphisme
     
@@ -97,37 +97,33 @@ void Game::commande(Event clavier)
     
     
     
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)&&eclairReady&&score>1000) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)&&eclairReady) 
     {
         grille.eclairTombe();
-        score-=1000;
-        eclairTimer=100000;
+        eclairTimer= 100000 ;
         eclairReady=false;
     }
     
     //supprime ligne
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)&&ligneReady&&score>1000) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)&&ligneReady) 
     {
         grille.suppLigne();
-        score-=1000;
         ligneTimer=100000;
         ligneReady=false;
         
     }
     //supprime colonne
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)&&colonneReady&&score>5000) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)&&colonneReady) 
     {
         grille.suppColonne();
-        score-=5000;
         colonneTimer=200000;
         colonneReady=false;
         
     }
     //meteorite
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)&&asteroideReady&&score>10000) 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)&&asteroideReady) 
     {
         grille.asteroideTombe();
-        score-=10000;
         asteroideTimer=500000;
         asteroideReady=false;
         
@@ -240,13 +236,34 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 
     /* Affichage des commandes pour utiliser les bonus */
-    sf::Text textBonuses;
-    textBonuses.setCharacterSize(18);
-    textBonuses.setFont(policeTexte);
-    textBonuses.setFillColor(sf::Color::Yellow);
-    textBonuses.setString("Press E for lightning   Press A for Asteroid ...");
-    textBonuses.move(0, 550.f);
+    
+    //eclair 
+    sf::Text Bonus_eclair;
+    Bonus_eclair.setCharacterSize(18);
+    Bonus_eclair.setFont(policeTexte);
+    Bonus_eclair.setFillColor(sf::Color::Yellow);    
+    Bonus_eclair.move(0, 550.f);
 
+    //asteroide
+    sf::Text Bonus_asteroide;
+    Bonus_asteroide.setCharacterSize(18);
+    Bonus_asteroide.setFont(policeTexte);
+    Bonus_asteroide.setFillColor(sf::Color::Black);
+    Bonus_asteroide.move(150, 550.f);
+
+    //ligne
+    sf::Text Bonus_ligne;
+    Bonus_ligne.setCharacterSize(18);
+    Bonus_ligne.setFont(policeTexte);
+    Bonus_ligne.setFillColor(sf::Color::Green);
+    Bonus_ligne.move(150, 700.f);
+
+    //colonne
+     sf::Text Bonus_colonne;
+    Bonus_colonne.setCharacterSize(18);
+    Bonus_colonne.setFont(policeTexte);
+    Bonus_colonne.setFillColor(sf::Color::Magenta);
+    Bonus_colonne.move(0, 700.f);
     
     
     
@@ -290,29 +307,79 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
       target.draw(textScore);
-      target.draw(textBonuses);
+      
       
       //eclair
       eclairSprite_.move(Vector2f(0,450.f));
       eclairSprite_.scale(0.1f,0.07f);
-      if (eclairReady&&score>1000) target.draw(eclairSprite_);
+
+      if (eclairReady)
+      {
+        target.draw(eclairSprite_);
+        Bonus_eclair.setString("Press E \nfor lightning");
+      }
+      else
+      {
+        int loading_eclair;
+        loading_eclair = round(100 - eclairTimer/1000);
+        std::string s_loading_eclair = std::to_string(loading_eclair);
+        Bonus_eclair.setString("Lightning\n"+s_loading_eclair+"% ready");
+      }
+      target.draw(Bonus_eclair);
       
       //asteroide
-      asteroideSprite_.move(Vector2f(100.f,450.f));
+      asteroideSprite_.move(Vector2f(125.f,450.f));
       asteroideSprite_.scale(0.3f,0.3f);
-      if (asteroideReady&&score>10000) target.draw(asteroideSprite_);
-      
+      if (asteroideReady) 
+      {
+        target.draw(asteroideSprite_);
+        Bonus_asteroide.setString("Press M \nfor Asteroid");
+      }
+      else
+      { 
+        int loading_asteroid;
+        loading_asteroid = round(100 - asteroideTimer/5000);
+        std::string s_loading_asteroid = std::to_string(loading_asteroid); 
+        Bonus_asteroide.setString("Asteroid\n"+s_loading_asteroid+"% ready");
+      }
+      target.draw(Bonus_asteroide) ;
+
       //ligne
       ligneSprite_.move(Vector2f(160.f,650.f));
       ligneSprite_.rotate(-45);
       ligneSprite_.scale(0.1f,0.1f);
-       if(ligneReady&&score>1000) target.draw(ligneSprite_);
-      
+       if(ligneReady) 
+      {
+        target.draw(ligneSprite_);
+        Bonus_ligne.setString("Press L \nfor Line-zap");
+      }
+      else
+      {
+        int loading_ligne;
+        loading_ligne = round(100 - ligneTimer/1000);
+        std::string s_loading_ligne = std::to_string(loading_ligne);
+        Bonus_ligne.setString("LineZap\n"+s_loading_ligne+"% ready");
+      }
+      target.draw(Bonus_ligne);
+            
       //colonne
       colonneSprite_.move(Vector2f(50.f,650.f));
       colonneSprite_.rotate(45);
       colonneSprite_.scale(0.1f,0.1f);
-       if(colonneReady&&score>5000) target.draw(colonneSprite_);
+       if(colonneReady) 
+       {
+        target.draw(colonneSprite_);
+        Bonus_colonne.setString("Press C \nfor Column-zap");
+       }
+       else
+       {
+        int loading_column;
+        loading_column = round(100 - colonneTimer/2000);
+        std::string s_loading_colonne = std::to_string(loading_column);
+        Bonus_colonne.setString("ColumnZap\n"+s_loading_colonne+"% ready");
+       }
+       target.draw(Bonus_colonne);
+
       }
 
       
