@@ -238,7 +238,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     
     
     
-    target.clear(Color::Black);  
+    if (local) target.clear(Color::Black);  
     if (local)
     {
     scaleToMinSize(backgroundSprite_,1900,1100);
@@ -252,6 +252,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
          PieceSprite_.setTextureRect(IntRect(grille.grille[i][j]*18,0,18,18));
          PieceSprite_.setPosition(j*18,i*18);
          PieceSprite_.move(28,31); //offset
+         if(!local) PieceSprite_.move(450.f,0);
          target.draw(PieceSprite_);
        }
    
@@ -261,16 +262,22 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
         PieceSprite_.setTextureRect(IntRect(piece.color*18,0,18,18));
         PieceSprite_.setPosition(piece.courant[i].x*18,piece.courant[i].y*18);
         PieceSprite_.move(28,31); //offset
+        if(!local) PieceSprite_.move(450.f,0);
         target.draw(PieceSprite_);
       }
     //affichage Preview
-    for (int i=0;i<4;i++)
+    if (local)
+    {
+
+    
+      for (int i=0;i<4;i++)
       {
         PieceSprite_.setTextureRect(IntRect(Preview.color*18,0,18,18));
         PieceSprite_.setPosition(Preview.courant[i].x*18,Preview.courant[i].y*18);
         PieceSprite_.move(170,31); //offset
         target.draw(PieceSprite_);
       }
+    }
 
       if (local)
       {
@@ -304,6 +311,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       GameOverSprite_.scale(1.2f, 2.05f);
       if(end)
       {
+        if(!local) GameOverSprite_.move(450.f,0);
         target.draw(GameOverSprite_);
       }
 
