@@ -82,8 +82,8 @@ int main()
 
 
     
-    Clock clock;
-
+    Clock clock; //on lance une horloge
+    
     //definition de la grille
     
     Grille Tertest;

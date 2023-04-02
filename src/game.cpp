@@ -174,14 +174,14 @@ bool Game::updateGame(float timer)
       }
     }
     
-    if((timer-tempsTampon)>0.05)
+    if((timer-tempsTampon)>0.05) // This ensures that the game piece moves at a fixed interval and avoids excessively fast gameplay.
     {
         
         piece.move(direction,grille);
         
         tempsTampon=timer;
     }
-    if((timer-tempsTmp)>delai/2)
+    if((timer-tempsTmp)>delai/2) //This ensures that the game piece can only be rotated every so often, which adds an additional element of strategy to the gameplay.
     {
         if(rotate)
         {
@@ -223,17 +223,29 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     setOriginToCenter(colonneSprite_);
     sf::Text textScore;
     sf::Text textMenu;
+    
     textScore.setFont(policeTexte);
     textMenu.setFont(policeTexte);
+    
     textScore.setCharacterSize(24);
     textScore.setFillColor(sf::Color::Magenta);
     textMenu.setCharacterSize(40);
     textMenu.setFillColor(sf::Color::Black);
+    
     std::string Scores=std::to_string(score);
     std::string Levels=std::to_string(level);
     textScore.setString("Score:"+Scores+"   Level:"+Levels);
     textScore.move(0, 400.f);
     textMenu.setString("Press P to play Solo\nPress Q to play Multi");
+
+
+    /* Affichage des commandes pour utiliser les bonus */
+    sf::Text textBonuses;
+    textBonuses.setCharacterSize(18);
+    textBonuses.setFont(policeTexte);
+    textBonuses.setFillColor(sf::Color::Yellow);
+    textBonuses.setString("Press E for lightning   Press A for Asteroid ...");
+    textBonuses.move(0, 550.f);
 
     
     
@@ -278,20 +290,24 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
       target.draw(textScore);
+      target.draw(textBonuses);
+      
       //eclair
       eclairSprite_.move(Vector2f(0,450.f));
       eclairSprite_.scale(0.1f,0.07f);
       if (eclairReady&&score>1000) target.draw(eclairSprite_);
+      
       //asteroide
-      target.draw(eclairSprite_);
       asteroideSprite_.move(Vector2f(100.f,450.f));
       asteroideSprite_.scale(0.3f,0.3f);
       if (asteroideReady&&score>10000) target.draw(asteroideSprite_);
+      
       //ligne
       ligneSprite_.move(Vector2f(160.f,650.f));
       ligneSprite_.rotate(-45);
       ligneSprite_.scale(0.1f,0.1f);
        if(ligneReady&&score>1000) target.draw(ligneSprite_);
+      
       //colonne
       colonneSprite_.move(Vector2f(50.f,650.f));
       colonneSprite_.rotate(45);
