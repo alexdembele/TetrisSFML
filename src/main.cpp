@@ -25,27 +25,34 @@ int field[M][N] = {0};
 struct Point
 {int x,y;} a[4], b[4];
 
-//piece et commande avec borne => def protocole
+// commande avec borne => def protocole
 sf::Packet& operator <<(sf::Packet& packet, const Game& game)
 {
     std::int16_t buffer;
+    std::int16_t score;
+    std::int16_t level;
      for (int i=0; i<20; i++)
     {
       for (int j=0;j<10;j++)
       {
         buffer=game.grille.grille[i][j];
         packet <<  buffer;
-        std::cout<<buffer<<";";
+        
       }
      
     }
-    std::cout<<"\n";
+    score=game.score;
+    level=game.level;
+    packet<<score;
+    packet<<level;
     return packet ;
 }
 
 sf::Packet& operator >>(sf::Packet& packet, Game& game)
 {
   std::int16_t buffer;
+  std::int16_t score;
+  std::int16_t level;
     for (int i=0; i<20; i++)
     {
       for (int j=0;j<10;j++)
@@ -58,6 +65,11 @@ sf::Packet& operator >>(sf::Packet& packet, Game& game)
       }
      
     }
+    packet<<score;
+    packet<<level;
+    game.score=score;
+    game.level=level;
+    
     
     return packet ;
 }
@@ -75,7 +87,7 @@ int main()
      //Reseau
     sf::TcpSocket socket;
     //socket.setBlocking(false);
-    sf::Socket::Status status = socket.connect("147.250.225.105",52000);
+    sf::Socket::Status status = socket.connect("147.250.224.152",52000);
     if(status != sf::Socket::Done)
     {
       printf("Erreur connection\n");
@@ -136,15 +148,7 @@ int main()
 
     
     socket.setBlocking(false);
-    //envoie grille
-    /*for (int i=0; i<20; i++)
-      {
-      for (int j=0;j<10;j++)
-      {
-        std::cout <<  myGame.grille.grille[i][j]<<";";
-      }
-     
-    }*/
+   
     
    
     

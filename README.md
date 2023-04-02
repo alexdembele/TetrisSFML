@@ -2,15 +2,7 @@
 
 Réutilisation d'ancien code, il se peut qu'il reste des lignes inutiles dans le projet final
 
-TO DO LIST:
 
--gameover
-
--créer classe game
-
--expérimenter multijoueur
-
--implémenter multijoueur
 
 
 
@@ -19,21 +11,27 @@ TO DO LIST:
 
 Installation des modules nécessaires:
 
--sudo apt-get install cmake
--sudo apt-get install clang-11
-sudo apt-get install libsfml-dev
+-sudo apt-get install cmake  
+-sudo apt-get install clang-11  
+sudo apt-get install libsfml-dev  
 
 Télécharger le projet dans un dossier
 
--git clone https://github.com/alexdembele/TetrisSFML
+-git clone https://github.com/alexdembele/TetrisSFML  
 -cd ../
 
-Construire le projet
--mkdir build
--cd build
--cmake ../TetrisSFML
--make
+Construire le projet  
+-mkdir build  
+-cd build  
+-cmake ../TetrisSFML  
+-make  
 
-Exécuter le projet
+***Attention*** 
+Dans mon code, le dossier s'appelle projet, il faut renommer les chemins d'inclusions pour avoir les graphismes; cela se trouve dans le constructeur de la classe Game. 
+
+
+Exécuter le projet  
 -./sfml-app
+
+Pour jouer en multijoueur, il faut lancer le server avant de lancer les joueurs. 
 

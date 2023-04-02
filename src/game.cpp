@@ -233,7 +233,8 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
     std::string Levels=std::to_string(level);
     textScore.setString("Score:"+Scores+"   Level:"+Levels);
     textScore.move(0, 400.f);
-    textMenu.setString("Press P to play Solo\nPress Q to play Multi");
+    if(!local) textScore.move(450.f,0);
+    textMenu.setString("Press P to play Solo\n");
 
     
     
@@ -257,6 +258,10 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
        }
    
     //affichage pièce en déplacement
+    if(local)
+    {
+
+    
     for (int i=0;i<4;i++)
       {
         PieceSprite_.setTextureRect(IntRect(piece.color*18,0,18,18));
@@ -265,6 +270,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
         if(!local) PieceSprite_.move(450.f,0);
         target.draw(PieceSprite_);
       }
+    }
     //affichage Preview
     if (local)
     {
@@ -284,7 +290,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       target.draw(FrameSprite_);
       FrameSprite_.move(Vector2f(450.f,0));
       target.draw(FrameSprite_);
-      target.draw(textScore);
+      
       //eclair
       eclairSprite_.move(Vector2f(0,450.f));
       eclairSprite_.scale(0.1f,0.07f);
@@ -305,7 +311,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
       colonneSprite_.scale(0.1f,0.1f);
        if(colonneReady&&score>5000) target.draw(colonneSprite_);
       }
-
+      target.draw(textScore);
       
 
       GameOverSprite_.scale(1.2f, 2.05f);
