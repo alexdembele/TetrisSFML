@@ -17,6 +17,7 @@ Grille::Grille()
 }
 int Grille::clearLine()
 {
+    //detecte si une ligne est remplie et la supprime le cas échéant, renvoie le score correspondant
     int nb_supprime=0;
     int score=0;
     int k=hauteur-1;
@@ -41,6 +42,7 @@ int Grille::clearLine()
 
 void Grille::ajoutePiece(Piece piece)
 {
+    //inscrit la piece dans la grille
     for (int i=0;i<4;i++) 
     {
         grille[piece.tampon[i].y][piece.tampon[i].x]=piece.color;
@@ -49,6 +51,7 @@ void Grille::ajoutePiece(Piece piece)
 
 void Grille::eclairTombe()
 {
+    //pouvoir special eclair: supprime les 4 cases les plus élevés das notre grille
     int i=0;
     int j=0;
     int quantite=4;
@@ -71,6 +74,7 @@ void Grille::eclairTombe()
 
 void Grille::asteroideTombe()
 {
+    //pouvoir special : fait tomber un carre 3x3 dans notre grille (censé être celle de l'adversaire)
     int r=rand() % 9+ 1;
     int i=0;
     while(!grille[i][r-1]&&!grille[i][r]&&!grille[i][r+1])
@@ -91,6 +95,7 @@ void Grille::asteroideTombe()
 
 void Grille::suppColonne()
 {
+    //pouvoir special: supprime une colonne de notre grille(censé être celle de l'adversaire)
     int r=rand() % 11;
     for(int i=0;i<hauteur;i++)
     {
@@ -100,6 +105,7 @@ void Grille::suppColonne()
 
 void Grille::suppLigne()
 {
+    //pouvoir special: suppprime une ligne de notre grille
     int i=0;
     int j=0;
     bool flag=true;

@@ -132,6 +132,7 @@ void Game::commande(Event clavier)
 
 bool Game::updateGame(float timer)
 {
+    //update les graphismes/physiques du jeu
     bool tick=false;
     
     if (eclairTimer>0)
@@ -206,6 +207,7 @@ bool Game::updateGame(float timer)
 
 void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    //affiche à l'écran notre partie
     sf::Sprite backgroundSprite_(backgroundTexture_);
     sf::Sprite PieceSprite_(PieceTexture_);
     sf::Sprite FrameSprite_(FrameTexture_);
@@ -414,6 +416,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Game::endGame()
 {
+  //detecte la fin d'une partie
   for (int j=0; j<largeur; j++)
   {
     if (grille.grille[1][j]!=0)
@@ -427,6 +430,8 @@ void Game::endGame()
 
 void Game::levelup()
 {
+
+  //detecte le changement de niveau
   if (level<60)
   {
     while (score>(1000+level*200)*level)

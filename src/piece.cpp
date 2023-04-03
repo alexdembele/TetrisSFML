@@ -5,6 +5,7 @@
 
 int defPiece[7][4] =
 {
+  //différentes pièces possibles
     1,3,5,7, // I
     2,4,5,7, // Z
     3,5,4,6, // S
@@ -29,6 +30,7 @@ Piece::Piece()
 
 void Piece::reset()
 {
+  //remet la pièce au dessus de la grille après que celle-ci soit tombé
   int typePiece = rand()%7;
   color=1+rand()%7;
          for (int i=0;i<4;i++)
@@ -42,6 +44,7 @@ void Piece::reset()
 
 bool Piece::occupe(Grille grille)
 {
+  //test si le mouvement commandé est valide
   for (int i=0;i<4;i++)
       if (courant[i].x<0 || courant[i].x>=largeur || courant[i].y>=hauteur) return 0;
       else if (grille.grille[courant[i].y][courant[i].x]) return 0;
@@ -51,6 +54,7 @@ bool Piece::occupe(Grille grille)
 
 void Piece::rotate(Grille grille)
 {
+  //fait tourner notre pièce
   point p =courant[1]; // centre de rotation
   for (int j=0;j<4;j++)
   {
@@ -70,6 +74,7 @@ void Piece::rotate(Grille grille)
 
 void Piece::move(int direction, Grille grille)
 {
+  //fait bouger notre pièce
   for (int i=0;i<4;i++) 
   { 
     tampon[i]=courant[i]; 
@@ -87,6 +92,7 @@ void Piece::move(int direction, Grille grille)
 
 void Piece::descend()
 {
+  //fait descendre notre pièce
   for (int i=0;i<4;i++) 
   { 
     tampon[i]=courant[i]; 

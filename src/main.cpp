@@ -25,7 +25,7 @@ int field[M][N] = {0};
 struct Point
 {int x,y;} a[4], b[4];
 
-// commande avec borne => def protocole
+// surcharge des operateurs de packet pour la classe Game.
 sf::Packet& operator <<(sf::Packet& packet, const Game& game)
 {
     std::int16_t buffer;
@@ -87,7 +87,7 @@ int main()
      //Reseau
     sf::TcpSocket socket;
     //socket.setBlocking(false);
-    sf::Socket::Status status = socket.connect("147.250.224.164",52000);
+    sf::Socket::Status status = socket.connect("1147.250.227.72",52000);
     if(status != sf::Socket::Done)
     {
       printf("Erreur connection\n");

@@ -9,7 +9,7 @@
 #include "grille.hpp"
 
 
-
+//ensemble de fonction utile pour les graphismes
 
 void setOriginToCenter(sf::Sprite &object);
 void setOriginToCenter(sf::Shape &object);
